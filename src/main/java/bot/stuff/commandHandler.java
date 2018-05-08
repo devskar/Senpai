@@ -1,9 +1,12 @@
 package bot.stuff;
 
+import bot.Privat;
 import bot.commands.Command;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -13,8 +16,6 @@ import java.util.HashMap;
  */
 
 public class commandHandler {
-
-
 
     public static final commandParser parse = new commandParser();
     public static HashMap<String, Command> commands = new HashMap<>();

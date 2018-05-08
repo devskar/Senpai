@@ -3,6 +3,7 @@ package bot.stuff;
 import bot.Privat;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -14,17 +15,18 @@ import java.util.ArrayList;
 public class commandParser {
 
     public commandContainer parser(String raw, MessageReceivedEvent event) {
-        String one = raw.replaceFirst(Privat.Prefix, "");
-        String[] two = one.split(" ");
-        String command = two[0];
+        String beheaded = raw.replaceFirst(Privat.Prefix, "");
+        String[] splitBeheaded = beheaded.split(" ");
+        String invoke = splitBeheaded[0];
         ArrayList<String> split = new ArrayList<>();
-        for ( String s : two) {
+        for ( String s : splitBeheaded) {
             split.add(s);
         }
         String[] args = new String[split.size() -1];
         split.subList(1, split.size()).toArray(args);
 
-        return new commandContainer(raw, one, two, command, args, event);
+
+        return new commandContainer(raw, beheaded, splitBeheaded, invoke, args, event);
     }
 
     public static class commandContainer {
@@ -46,4 +48,5 @@ public class commandParser {
         }
 
     }
+
 }

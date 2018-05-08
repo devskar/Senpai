@@ -1,10 +1,15 @@
-package bot;
+package bot.stuff;
 
+import bot.Privat;
+import bot.commands.everyone.Ping;
+import bot.commands.everyone.Random;
+import bot.listener.commandListener;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 
 import javax.security.auth.login.LoginException;
+
 
 /**
  * Coded by Oskar#7402
@@ -17,11 +22,16 @@ public class Bot {
     public static JDABuilder builder;
     public static JDA jda;
 
+
     public static void main(String[] args){
 
         builder = new JDABuilder(AccountType.BOT)
                 .setAutoReconnect(true)
                 .setToken(Privat.TOKEN);
+
+
+        addCommands();
+        addListener();
 
         try {
             jda = builder.buildBlocking();
@@ -31,19 +41,18 @@ public class Bot {
             e.printStackTrace();
         }
 
-        addCommands();
-        addListener();
+
+
     }
 
+
+
     public static void addCommands(){
-
-
-
+        commandHandler.commands.put("ping", new Ping());
+        commandHandler.commands.put("random", new Random());
     }
 
     public static void addListener(){
-
-
+        builder.addEventListener(new commandListener());
     }
-
 }
