@@ -60,7 +60,7 @@ public class Random implements Command {
 
     @Override
     public String[] alias() {
-        String[] abc = {"rndm", "random", };
+        String[] abc = {"rndm", "random", "dice"};
         return abc;
     }
 

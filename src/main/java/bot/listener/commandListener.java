@@ -20,13 +20,8 @@ public class commandListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
 
         if(event.getMessage().getContentDisplay().startsWith(Privat.Prefix)){
-            try {
                 commandHandler.handlerCommand(commandHandler.parse.parser(event.getMessage().getContentDisplay(), event));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
         }
     }
 }

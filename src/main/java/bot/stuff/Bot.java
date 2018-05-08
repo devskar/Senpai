@@ -29,7 +29,6 @@ public class Bot {
                 .setAutoReconnect(true)
                 .setToken(Privat.TOKEN);
 
-
         addCommands();
         addListener();
 
@@ -38,8 +37,6 @@ public class Bot {
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
-
-
     }
 
 
