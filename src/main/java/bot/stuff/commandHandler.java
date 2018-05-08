@@ -20,7 +20,7 @@ public class commandHandler {
     public static final commandParser parse = new commandParser();
     public static HashMap<String, Command> commands = new HashMap<>();
 
-    public static void handlerCommand(commandParser.commandContainer cmd) throws ParseException, IOException {
+    public static void handlerCommand(commandParser.commandContainer cmd){
 
         if (commands.containsKey(cmd.invoke)) {
 

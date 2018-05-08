@@ -28,4 +28,13 @@ public class Check {
         }
     }
 
+    public static boolean isInteger(String numb) {
+        try {
+            Integer.parseInt(numb);
+        } catch(NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
 }

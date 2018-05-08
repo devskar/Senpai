@@ -16,6 +16,16 @@ public class Ping implements Command {
     }
 
     @Override
+    public String help() {
+        return null;
+    }
+
+    @Override
+    public String description() {
+        return null;
+    }
+
+    @Override
     public void executed(boolean safe, MessageReceivedEvent event) {
 
     }

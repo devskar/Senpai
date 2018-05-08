@@ -12,7 +12,14 @@ public interface Command {
 
     void action(String[] args, MessageReceivedEvent event);
 
+    String help();
+
+    String description();
+
+    String[] alias();
+
     void executed(boolean safe, MessageReceivedEvent event);
 
     boolean called(String[] args, MessageReceivedEvent event);
+
 }

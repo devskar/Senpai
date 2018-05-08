@@ -35,12 +35,9 @@ public class Bot {
 
         try {
             jda = builder.buildBlocking();
-        } catch (LoginException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
-
 
 
     }

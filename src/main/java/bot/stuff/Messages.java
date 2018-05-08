@@ -1,7 +1,10 @@
 package bot.stuff;
 
 import net.dv8tion.jda.core.EmbedBuilder;
+import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.core.entities.User;
 
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
@@ -23,5 +26,15 @@ public class Messages {
 
         tc.sendMessage(eb.build()).queue(msg -> {msg.delete().queueAfter(5, TimeUnit.SECONDS);});
     }
+
+    public static EmbedBuilder embed(Member m){
+
+        EmbedBuilder eb = new EmbedBuilder()
+                .setColor(m.getRoles().get(0).getColor());
+
+        return eb;
+
+    }
+
 
 }
