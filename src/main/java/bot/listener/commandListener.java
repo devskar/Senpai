@@ -1,13 +1,9 @@
 package bot.listener;
 
 import bot.Privat;
-import bot.stuff.commandHandler;
+import bot.other.commandHandler;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
-
-import java.io.IOException;
-import java.text.ParseException;
 
 /**
  * Coded by Oskar#7402

@@ -1,4 +1,4 @@
-package bot.stuff;
+package bot.other;
 
 import bot.Privat;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;

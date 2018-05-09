@@ -1,6 +1,7 @@
 package bot.stuff;
 
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.User;
 
 /**
  * Coded by Oskar#7402
@@ -35,6 +36,16 @@ public class Check {
             return false;
         }
         return true;
+    }
+
+    public static boolean isDev(User u){
+
+        if(u.getId().equals("226011931935375360") || u.getId().equals("231422116338073600")){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
 }

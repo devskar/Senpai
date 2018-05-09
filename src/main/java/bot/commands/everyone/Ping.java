@@ -26,6 +26,11 @@ public class Ping implements Command {
     }
 
     @Override
+    public String[] alias() {
+        return new String[0];
+    }
+
+    @Override
     public void executed(boolean safe, MessageReceivedEvent event) {
 
     }

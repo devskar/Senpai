@@ -1,9 +1,10 @@
-package bot.stuff;
+package bot.Senpai;
 
 import bot.Privat;
 import bot.commands.everyone.Ping;
 import bot.commands.everyone.Random;
 import bot.listener.commandListener;
+import bot.other.commandHandler;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
