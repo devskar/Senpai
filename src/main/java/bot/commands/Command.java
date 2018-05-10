@@ -18,6 +18,8 @@ public interface Command {
 
     String[] alias();
 
+    String name();
+
     void executed(boolean safe, MessageReceivedEvent event);
 
     boolean called(String[] args, MessageReceivedEvent event);

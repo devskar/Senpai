@@ -24,6 +24,7 @@ public class commandParser {
         }
         String[] args = new String[split.size() -1];
         split.subList(1, split.size()).toArray(args);
+        event.getMessage().delete().queue();
 
 
         return new commandContainer(raw, beheaded, splitBeheaded, invoke, args, event);

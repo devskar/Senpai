@@ -1,6 +1,7 @@
 package bot.Senpai;
 
 import bot.Privat;
+import bot.commands.everyone.Help;
 import bot.commands.everyone.Ping;
 import bot.commands.everyone.Random;
 import bot.listener.commandListener;
@@ -43,6 +44,7 @@ public class Bot {
 
 
     public static void addCommands(){
+        commandHandler.commands.put(new Help().name(), new Help());
         commandHandler.commands.put("ping", new Ping());
         commandHandler.commands.put("random", new Random());
     }
