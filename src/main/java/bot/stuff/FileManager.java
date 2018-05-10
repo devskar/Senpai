@@ -47,19 +47,17 @@ public class FileManager {
 
     }
 
-    public static boolean lookForBool(String file, String search[]){
+    public static boolean lookForBool(String file, String search){
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
             while( (line = br.readLine()) != null ) {
-                for (int i = 0; i < search.length; i++){
-                if ( line.toLowerCase().equals(search[i])) {
-                    System.out.println(line);
+                if ( line.toLowerCase().startsWith(search)) {
                     return true;
                 }
             }
-        }
+
             br.close();
 
         } catch (FileNotFoundException e) {

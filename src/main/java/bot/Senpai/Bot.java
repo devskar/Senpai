@@ -1,9 +1,9 @@
 package bot.Senpai;
 
 import bot.Privat;
-import bot.commands.everyone.Help;
-import bot.commands.everyone.Ping;
-import bot.commands.everyone.Random;
+import bot.botlists.InsertStats;
+import bot.commands.everyone.*;
+import bot.commands.everyone.Error;
 import bot.listener.commandListener;
 import bot.other.commandHandler;
 import net.dv8tion.jda.core.AccountType;
@@ -47,9 +47,13 @@ public class Bot {
         commandHandler.commands.put(new Help().name(), new Help());
         commandHandler.commands.put("ping", new Ping());
         commandHandler.commands.put("random", new Random());
+        commandHandler.commands.put("invite", new Inivte());
+        commandHandler.commands.put("error", new Error());
     }
 
     public static void addListener(){
-        builder.addEventListener(new commandListener());
+        builder.addEventListener(
+                new commandListener()/*,
+                new InsertStats()*/);
     }
 }
