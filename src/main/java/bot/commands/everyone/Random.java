@@ -6,6 +6,7 @@ import bot.stuff.Check;
 import bot.stuff.Messages;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import sun.plugin2.message.Message;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,13 +22,13 @@ public class Random implements Command {
 
     event.getMessage().delete().queue();
 
-    if((args.length < 1)){
-        Messages.error(event.getTextChannel(), help());
+    if((args.length < 2)){
+        Messages.error(event.getTextChannel(), Messages.markdown(help(), null));
         return;
     }
 
-    if(!(Check.isInteger(args[0]) && Check.isInteger(args[1]))){
-        Messages.error(event.getTextChannel(), help());
+    if(!(Check.isInteger(args[0]) || Check.isInteger(args[1]))){
+        Messages.error(event.getTextChannel(), Messages.markdown(help(), null));
         return;
     }
 
@@ -45,9 +46,8 @@ public class Random implements Command {
 
 
     event.getTextChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription(
-            "\uD83C\uDFB2 Random result ```asciidoc\n" +
-                            "= You rolled a " + randomNum + " = ```").build()).queue(msg -> {msg.delete().queueAfter(3, TimeUnit.MINUTES);});
-
+            "\uD83C\uDFB2 Random result \n" +
+                    Messages.markdown("You rolled a " + randomNum, null)).build()).queue(msg -> {msg.delete().queueAfter(3, TimeUnit.MINUTES);});
     }
 
     @Override
