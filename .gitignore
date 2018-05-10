@@ -24,3 +24,5 @@ hs_err_pid*
 Privat.java
 *.xml
 *.iml
+*.txt
+*.dat
