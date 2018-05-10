@@ -44,13 +44,15 @@ public class Random implements Command {
 
 
 
-    event.getTextChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription("\uD83C\uDFB2 You rolled a " + randomNum).build()).queue(msg -> {msg.delete().queueAfter(3, TimeUnit.MINUTES);});
+    event.getTextChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription(
+            "\uD83C\uDFB2 Random result ```asciidoc\n" +
+                            "= You rolled a " + randomNum + " = ```").build()).queue(msg -> {msg.delete().queueAfter(3, TimeUnit.MINUTES);});
 
     }
 
     @Override
     public String help() {
-        return Privat.Prefix + "random [numb1] [numb2]";
+        return Privat.Prefix + name() + " [numb1] [numb2]";
     }
 
     @Override
@@ -62,6 +64,11 @@ public class Random implements Command {
     public String[] alias() {
         String[] abc = {"rndm", "random", "dice"};
         return abc;
+    }
+
+    @Override
+    public String name() {
+        return "random";
     }
 
     @Override

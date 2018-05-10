@@ -1,5 +1,6 @@
 package bot.commands.everyone;
 
+import bot.Privat;
 import bot.commands.Command;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
@@ -17,17 +18,22 @@ public class Ping implements Command {
 
     @Override
     public String help() {
-        return null;
+        return Privat.Prefix + name();
     }
 
     @Override
     public String description() {
-        return null;
+        return "Shows the ping of the bot.";
     }
 
     @Override
     public String[] alias() {
         return new String[0];
+    }
+
+    @Override
+    public String name() {
+        return "ping";
     }
 
     @Override
