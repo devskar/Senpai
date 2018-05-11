@@ -48,12 +48,14 @@ public class Clear implements Command {
             return;
         }
 
+        event.getMessage().delete().queue();
+
         MessageHistory history = tc.getHistory();
         List<Message> msgs = history.retrievePast(amount).complete();
         tc.deleteMessages(msgs).queue();
 
-        String msg = Messages.markdown("Successfully deleted Messages", "Deleted " + amount + " Messages in " + tc.getName() + ".");
-        tc.sendMessage(msg).queue(msga -> {msga.delete().queueAfter(5, TimeUnit.SECONDS);});
+        String msg = Messages.markdown("Successfully deleted Messages", "Deleted " + msgs.size() + " Messages in " + tc.getName() + ".");
+        tc.sendMessage(msg).queue();
 
     }
 

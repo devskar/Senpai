@@ -22,13 +22,18 @@ public class Messages {
                 .setTitle("Error")
                 .setDescription(":warning: " + content);
 
-        tc.sendMessage(eb.build()).queue(msg -> {msg.delete().queueAfter(5, TimeUnit.SECONDS);});
+        tc.sendMessage(eb.build()).queue();
     }
 
     public static EmbedBuilder embed(Member m){
 
-        EmbedBuilder eb = new EmbedBuilder()
-                .setColor(m.getRoles().get(0).getColor());
+        EmbedBuilder eb = new EmbedBuilder();
+
+            if(m.getRoles().size() == 0){
+                eb.setColor(Color.white);
+            }else{
+                eb.setColor(m.getRoles().get(0).getColor());
+            }
         return eb;
     }
 
@@ -67,7 +72,7 @@ public class Messages {
     }
 
     public static void sendError(String id, TextChannel tc){
-        tc.sendMessage("`Error#" + id + "`").queue(msg -> {msg.delete().queueAfter(15, TimeUnit.SECONDS);});
+        tc.sendMessage("`Error#" + id + "`").queue();
     }
 
 }

@@ -6,8 +6,10 @@ import bot.commands.everyone.Error;
 import bot.commands.moderator.Clear;
 import bot.commands.moderator.JoinMessage;
 import bot.commands.moderator.MoveAll;
+import bot.listener.Introduction;
 import bot.listener.commandListener;
 import bot.listener.mentionListener;
+import bot.listener.selfMessageListener;
 import bot.other.commandHandler;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
@@ -62,7 +64,9 @@ public class Bot {
     public static void addListener(){
         builder.addEventListener(
                 new commandListener(),
-                new mentionListener()
+                new mentionListener(),
+                new selfMessageListener(),
+                new Introduction()
                 /*,
                 new InsertStats()*/);
     }

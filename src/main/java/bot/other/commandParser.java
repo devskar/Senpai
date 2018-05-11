@@ -1,6 +1,8 @@
 package bot.other;
 
 import bot.Privat;
+import bot.stuff.Check;
+import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.io.IOException;
@@ -25,8 +27,14 @@ public class commandParser {
         }
         String[] args = new String[split.size() -1];
         split.subList(1, split.size()).toArray(args);
-        event.getMessage().delete().queueAfter(3, TimeUnit.SECONDS);
 
+        try {
+            if(Check.Perms(Permission.MESSAGE_MANAGE, event.getGuild().getSelfMember(), event.getGuild())) {
+                event.getMessage().delete().queueAfter(3, TimeUnit.SECONDS);
+            }
+        }catch(Exception e){
+
+        }
 
         return new commandContainer(raw, beheaded, splitBeheaded, invoke, args, event);
     }

@@ -46,7 +46,7 @@ public class Error implements Command {
                     sb.append(Error[i] + " ");
                 }
 
-                event.getTextChannel().sendMessage(Messages.markdown("Error#" + args[0], sb.toString().replace(args[0], ""))).queue(msg -> {msg.delete().queueAfter(25, TimeUnit.SECONDS);});
+                event.getTextChannel().sendMessage(Messages.markdown("Error#" + args[0], sb.toString().replace(args[0], ""))).queue();
             }else{
                 Messages.sendError("0003", event.getTextChannel());
             }

@@ -41,7 +41,6 @@ public class Check {
     }
 
     public static boolean vcByID(String id, Guild g){
-
         if(g.getVoiceChannelById(id) == null){
             return false;
         }else{

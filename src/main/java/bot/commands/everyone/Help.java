@@ -42,7 +42,7 @@ public class Help implements Command {
 
             for (Command c: cmds) {
                 if (command.equalsIgnoreCase(c.name())){
-                    event.getTextChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription(Messages.markdown("Command " + c.name(), c.help())).build()).queue(msg -> {msg.delete().queueAfter(30, TimeUnit.SECONDS);});
+                    event.getTextChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription(Messages.markdown("Command " + c.name(), c.help())).build()).queue();
                 }else{
                     i++;
                 }

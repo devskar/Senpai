@@ -56,7 +56,7 @@ public class MoveAll implements Command {
 
         String msg = Messages.markdown("Moved Members", "Moved " + membersize + " Members from " + currentvc.getName() + " to " + aftervc.getName() + ".");
 
-        event.getTextChannel().sendMessage(msg).queue(msga -> {msga.delete().queueAfter(10, TimeUnit.SECONDS);});
+        event.getTextChannel().sendMessage(msg).queue();
     }
 
     @Override

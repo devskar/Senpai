@@ -19,7 +19,6 @@ public class Invite implements Command {
 
         Guild g = event.getGuild();
         if (Check.Perms(Permission.CREATE_INSTANT_INVITE, event.getMember(), event.getGuild())) {
-
             String inv = g.getTextChannels().get(0).createInvite().setMaxAge(0).complete().getURL();
             event.getTextChannel().sendMessage(inv).queue();
         } else{

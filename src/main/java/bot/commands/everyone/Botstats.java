@@ -35,8 +35,7 @@ public class Botstats implements Command {
         for(int i = 0; i < statsname.length; i++){
             eb.addField(statsname[i], String.valueOf(stats[i]), true);
         }
-        event.getTextChannel().sendMessage(eb.build()).queue(msg -> msg.delete().queueAfter(25, TimeUnit.SECONDS));
-
+        event.getTextChannel().sendMessage(eb.build()).queue();
     }
 
     @Override

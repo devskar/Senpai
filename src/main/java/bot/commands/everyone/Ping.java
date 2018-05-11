@@ -1,7 +1,9 @@
 package bot.commands.everyone;
 
 import bot.Privat;
+import bot.Senpai.Bot;
 import bot.commands.Command;
+import bot.stuff.Messages;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 /**
@@ -13,7 +15,9 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 public class Ping implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        event.getTextChannel().sendMessage("pong").queue();
+
+        event.getTextChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription("Ping: " + Bot.jda.getPing() + "ms").build()).queue();
+
     }
 
     @Override

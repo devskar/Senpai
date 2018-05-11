@@ -20,8 +20,6 @@ public class Random implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
 
-    event.getMessage().delete().queue();
-
     if((args.length < 2)){
         Messages.error(event.getTextChannel(), Messages.markdown(help(), null));
         return;
@@ -47,7 +45,7 @@ public class Random implements Command {
 
     event.getTextChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription(
             "\uD83C\uDFB2 Random result \n" +
-                    Messages.markdown("You rolled a " + randomNum, null)).build()).queue(msg -> {msg.delete().queueAfter(3, TimeUnit.MINUTES);});
+                    Messages.markdown("You rolled a " + randomNum, null)).build()).queue();
     }
 
     @Override
