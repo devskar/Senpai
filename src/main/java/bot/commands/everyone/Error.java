@@ -23,6 +23,7 @@ public class Error implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
 
+
         if(args[0].contains("#")){
             args[0].replace("#", "");
         }
@@ -33,7 +34,6 @@ public class Error implements Command {
         if (Check.isInteger(args[0])){
             if(FileManager.lookForBool(path, args[0])) {
                 String[] Error = FileManager.lookFor(path, args[0]);
-
 
                 StringBuilder sb = new StringBuilder();
 
