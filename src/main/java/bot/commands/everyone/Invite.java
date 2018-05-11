@@ -13,7 +13,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
  * github.com/oskardevkappa/
  */
 
-public class Inivte implements Command {
+public class Invite implements Command {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
 
