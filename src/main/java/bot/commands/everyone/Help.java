@@ -21,7 +21,7 @@ public class Help implements Command {
 
         Command[] cmds = commandHandler.commands.values().toArray(new Command[0]);
 
-        if(args.length == 0){
+        if(args.length < 1){
             StringBuilder sb = new StringBuilder();
 
             sb.append("=== Help ===\n\n");
@@ -36,14 +36,20 @@ public class Help implements Command {
                     sb.toString() + "```").queue();
         }else{
 
-            String command =  args[1];
+            String command =  args[0];
+
+            int i = 0;
 
             for (Command c: cmds) {
                 if (command.equalsIgnoreCase(c.name())){
                     event.getTextChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription(Messages.markdown("Command " + c.name(), c.help())).build()).queue(msg -> {msg.delete().queueAfter(5, TimeUnit.SECONDS);});
                 }else{
-                    Messages.sendError("0003", event.getTextChannel());
+                    i++;
                 }
+            }
+
+            if (i == cmds.length){
+                Messages.sendError("0003", event.getTextChannel());
             }
         }
 
