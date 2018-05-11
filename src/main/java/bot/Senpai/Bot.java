@@ -4,6 +4,7 @@ import bot.Privat;
 import bot.commands.everyone.*;
 import bot.commands.everyone.Error;
 import bot.commands.moderator.Clear;
+import bot.commands.moderator.JoinMessage;
 import bot.commands.moderator.MoveAll;
 import bot.listener.commandListener;
 import bot.listener.mentionListener;
@@ -54,6 +55,7 @@ public class Bot {
         commandHandler.commands.put(new MoveAll().name(), new MoveAll());
         commandHandler.commands.put(new Clear().name(), new Clear());
         commandHandler.commands.put(new Botstats().name(), new Botstats());
+        commandHandler.commands.put(new JoinMessage().name(), new JoinMessage());
         commandHandler.commands.put("test", new Test());
     }
 

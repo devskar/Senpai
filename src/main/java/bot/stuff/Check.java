@@ -58,6 +58,15 @@ public class Check {
         return true;
     }
 
+    public static boolean isLong(String numb) {
+        try {
+            Long.getLong(numb);
+        } catch(NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
     public static boolean isDev(User u){
 
         if(u.getId().equals("226011931935375360") || u.getId().equals("231422116338073600")){
@@ -69,7 +78,7 @@ public class Check {
 
     public static boolean Perms(Permission perm, Member m, Guild g){
 
-        if(g.getSelfMember().getPermissions().contains(perm) && m.getPermissions().contains(perm) && g.getSelfMember().canInteract(m)){
+        if(g.getSelfMember().getPermissions().contains(perm) && m.getPermissions().contains(perm)){
             return true;
         }else{
             return false;
