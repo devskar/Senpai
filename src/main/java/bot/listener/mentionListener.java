@@ -19,9 +19,14 @@ public class mentionListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
 
         if(event.getMessage().getContentDisplay().equals("@" + event.getGuild().getSelfMember().getEffectiveName())){
-            EmbedBuilder eb =Messages.embed(event.getGuild().getSelfMember()).setTitle("Hi I am your Senpai")
-                    .setDescription("I am coded by oskar#7402 and Im listening to the Prefix `" + Privat.Prefix + ".\n" +
-                    "If you got any questions you can join my [Support Server](" + Privat.SERVERID + ").")
+            EmbedBuilder eb = Messages.embed(event.getGuild().getSelfMember()).setTitle("Hi I am your Senpai")
+
+                    .setDescription("I am coded by oskar#7402 and Im listening to the Prefix `" + Privat.Prefix + "`.\n" +
+                    "If you got any questions you can join my [Support Server](" + Privat.SERVERINVITE + ").\n"
+                    + "If you want to invite the Senpai bot click [here](" + Privat.BOTINVITE + ").\n"
+                    + "You can find my github documentation [here](" + Privat.GITHUBREPO + ")."
+                    )
+
                     .setAuthor("Hi i am your Senpai", null, Bot.jda.getSelfUser().getAvatarUrl());
             event.getTextChannel().sendMessage(eb.build()).queue();
         }
