@@ -5,6 +5,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Coded by Oskar#7402
@@ -24,7 +25,7 @@ public class commandParser {
         }
         String[] args = new String[split.size() -1];
         split.subList(1, split.size()).toArray(args);
-        event.getMessage().delete().queue();
+        event.getMessage().delete().queueAfter(3, TimeUnit.SECONDS);
 
 
         return new commandContainer(raw, beheaded, splitBeheaded, invoke, args, event);
