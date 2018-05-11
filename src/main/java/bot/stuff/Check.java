@@ -69,7 +69,7 @@ public class Check {
 
     public static boolean Perms(Permission perm, Member m, Guild g){
 
-        if(g.getSelfMember().getPermissions().contains(perm) && m.getPermissions().contains(perm)){
+        if(g.getSelfMember().getPermissions().contains(perm) && m.getPermissions().contains(perm) && g.getSelfMember().canInteract(m)){
             return true;
         }else{
             return false;

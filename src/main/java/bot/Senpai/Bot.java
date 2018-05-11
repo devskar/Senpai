@@ -50,7 +50,7 @@ public class Bot {
         commandHandler.commands.put(new Ping().name(), new Ping());
         commandHandler.commands.put(new Random().name(), new Random());
         commandHandler.commands.put(new Invite().name(), new Invite());
-        commandHandler.commands.put(new Random().name(), new Error());
+        commandHandler.commands.put(new Error().name(), new Error());
         commandHandler.commands.put(new MoveAll().name(), new MoveAll());
         commandHandler.commands.put(new Clear().name(), new Clear());
     }

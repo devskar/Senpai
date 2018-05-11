@@ -25,23 +25,25 @@ public class Clear implements Command {
 
         TextChannel tc = event.getTextChannel();
 
-        if (!Check.isInteger(args[1])){
+
+        if (!Check.isInteger(args[0])){
             Messages.sendError("0002", event.getTextChannel());
             return;
         }
 
-        int amount = Integer.parseInt(args[1]);
+        int amount = Integer.parseInt(args[0]);
 
         if (!(amount > 1)){
             Messages.sendError("0007", tc);
             return;
         }
+
         if (!(amount <= 100)){
             Messages.sendError("0006", tc);
             return;
         }
 
-        if (Check.Perms(Permission.MESSAGE_MANAGE, event.getMember(), event.getGuild())){
+        if (!Check.Perms(Permission.MESSAGE_MANAGE, event.getMember(), event.getGuild())){
             Messages.sendError("0001", tc);
             return;
         }
@@ -52,9 +54,6 @@ public class Clear implements Command {
 
         String msg = Messages.markdown("Successfully deleted Messages", "Deleted " + amount + " Messages in " + tc.getName() + ".");
         tc.sendMessage(msg).queue(msga -> {msga.delete().queueAfter(5, TimeUnit.SECONDS);});
-
-
-
 
     }
 

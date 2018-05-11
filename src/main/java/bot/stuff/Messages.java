@@ -67,7 +67,7 @@ public class Messages {
     }
 
     public static void sendError(String id, TextChannel tc){
-        tc.sendMessage("Error#" + id).queue(msg -> {msg.delete().queueAfter(15, TimeUnit.SECONDS);});
+        tc.sendMessage("`Error#" + id + "`").queue(msg -> {msg.delete().queueAfter(15, TimeUnit.SECONDS);});
     }
 
 }
