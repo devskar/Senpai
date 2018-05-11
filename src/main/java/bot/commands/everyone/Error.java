@@ -4,9 +4,11 @@ import bot.Privat;
 import bot.commands.Command;
 import bot.stuff.Check;
 import bot.stuff.FileManager;
+import bot.stuff.Messages;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
-import java.io.File;
+import java.util.concurrent.TimeUnit;
+
 
 /**
  * Coded by Oskar#7402
@@ -39,8 +41,12 @@ public class Error implements Command {
                     sb.append(Error[i] + " ");
                 }
 
-                event.getTextChannel().sendMessage(sb.toString().replace(args[0] + " ", "")).queue();
+                event.getTextChannel().sendMessage(Messages.markdown("Error#" + args[0], sb.toString().replace(args[0], ""))).queue(msg -> {msg.delete().queueAfter(25, TimeUnit.SECONDS);});
+            }else{
+                Messages.sendError("0003", event.getTextChannel());
             }
+        }else{
+            Messages.sendError("0002", event.getTextChannel());
         }
 
     }
