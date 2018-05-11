@@ -35,7 +35,7 @@ public class MoveAll implements Command {
             Messages.sendError("0001", event.getTextChannel());
         }
 
-        String idorname = args[1];
+        String idorname = args[0];
         VoiceChannel currentvc = event.getMember().getVoiceState().getChannel();
         VoiceChannel aftervc = null;
 
