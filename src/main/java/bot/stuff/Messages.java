@@ -32,24 +32,35 @@ public class Messages {
         return eb;
     }
 
-    public static String markdown(String title, String content){
+    public static String markdown(String title, String text){
+
+        String content = text;
+
+        while(content.endsWith(" ")) {
+            content = content.substring(0, text.length() - 1);
+        }
+
+        while(content.startsWith(" ")){
+            content = content.replaceFirst(" ", "");
+        }
+
 
         if(title == null) {
             String Markdown = "```asciidoc\n" +
-                    "[" + content + "] ```";
+                    "[" + content + "]```";
             return Markdown;
         }
 
         if(content == null){
             String Markdown = "```asciidoc\n" +
-                    "= " + title + " = ```";
+                    "= " + title + " =```";
             return Markdown;
         }
 
         if(!(title == null && content == null)){
             String Markdown = "```asciidoc\n" +
-                    "= " + title + " = \n" +
-                    "[" + content + "] ```";
+                    "= " + title + " =\n" +
+                    "[" + content + "]```";
             return Markdown;
         }
         return null;
