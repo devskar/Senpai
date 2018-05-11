@@ -24,6 +24,11 @@ public class Error implements Command {
     public void action(String[] args, MessageReceivedEvent event) {
 
 
+        if(args.length < 1){
+            Messages.sendError("0004", event.getTextChannel());
+            return;
+        }
+
         if(args[0].contains("#")){
             args[0].replace("#", "");
         }
