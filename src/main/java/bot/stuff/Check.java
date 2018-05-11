@@ -33,7 +33,7 @@ public class Check {
 
     public static boolean vcByName(String name, Guild g){
 
-        if(g.getTextChannelsByName(name, false).size() == 0){
+        if(g.getVoiceChannelsByName(name, false).size() == 0){
             return false;
         }else{
             return true;
@@ -42,7 +42,7 @@ public class Check {
 
     public static boolean vcByID(String id, Guild g){
 
-        if(g.getTextChannelById(id) == null){
+        if(g.getVoiceChannelById(id) == null){
             return false;
         }else{
             return true;
