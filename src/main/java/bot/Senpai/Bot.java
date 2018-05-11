@@ -53,6 +53,7 @@ public class Bot {
         commandHandler.commands.put(new Error().name(), new Error());
         commandHandler.commands.put(new MoveAll().name(), new MoveAll());
         commandHandler.commands.put(new Clear().name(), new Clear());
+        commandHandler.commands.put(new Botstats().name(), new Botstats());
         commandHandler.commands.put("test", new Test());
     }
 

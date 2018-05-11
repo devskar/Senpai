@@ -2,6 +2,7 @@ package bot.botlists;
 
 import bot.Privat;
 import bot.Senpai.Bot;
+import bot.stuff.Stats;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import org.discordbots.api.client.DiscordBotListAPI;
 
@@ -25,9 +26,7 @@ public class Apis extends ListenerAdapter {
                 .token(Privat.DiscordbotsorgToken)
                 .build();
 
-        String botId = "443447273175908352";
-        int serverCount = Bot.jda.getGuilds().size();
-        api.setStats(botId, serverCount);
+        api.setStats(Privat.BOTID, Stats.Guilds());
     }
 
 }
