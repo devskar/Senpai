@@ -38,17 +38,20 @@ public class Messages {
     }
 
     public static String markdown(String title, String text){
-
+        System.out.println(text);
         String content = text;
+        System.out.println(content);
 
-        while(content.endsWith(" ")) {
-            content = content.substring(0, text.length() - 1);
+        if (content != null) {
+
+            while (content.endsWith(" ")) {
+                content = content.substring(0, text.length() - 1);
+            }
+
+            while (content.startsWith(" ")) {
+                content = content.replaceFirst(" ", "");
+            }
         }
-
-        while(content.startsWith(" ")){
-            content = content.replaceFirst(" ", "");
-        }
-
 
         if(title == null) {
             String Markdown = "```asciidoc\n" +
@@ -74,5 +77,8 @@ public class Messages {
     public static void sendError(String id, TextChannel tc){
         tc.sendMessage("`Error#" + id + "`").queue();
     }
+
+    public static String MarkDownStart = "```asciidoc\n";
+    public static String MarkDownEnd = "```";
 
 }

@@ -4,7 +4,7 @@ import bot.Privat;
 import bot.Senpai.Bot;
 import bot.commands.Command;
 import bot.stuff.Messages;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 /**
  * Coded by Oskar#7402
@@ -14,9 +14,9 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Ping implements Command {
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
 
-        event.getTextChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription("Ping: " + Bot.jda.getPing() + "ms").build()).queue();
+        event.getChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription("Ping: " + Bot.jda.getPing() + "ms").build()).queue();
 
     }
 
@@ -41,12 +41,17 @@ public class Ping implements Command {
     }
 
     @Override
-    public void executed(boolean safe, MessageReceivedEvent event) {
+    public boolean visible() {
+        return true;
+    }
+
+    @Override
+    public void executed(boolean safe, GuildMessageReceivedEvent event) {
 
     }
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent event) {
+    public boolean called(String[] args, GuildMessageReceivedEvent event) {
         return false;
     }
 }

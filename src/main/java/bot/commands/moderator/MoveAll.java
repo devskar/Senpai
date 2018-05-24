@@ -7,7 +7,7 @@ import bot.stuff.Messages;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.VoiceChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,20 +19,20 @@ import java.util.concurrent.TimeUnit;
 
 public class MoveAll implements Command {
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
 
         if (args.length < 1){
-            Messages.sendError("0004", event.getTextChannel());
+            Messages.sendError("0004", event.getChannel());
             return;
         }
 
         if (!event.getMember().getVoiceState().inVoiceChannel()){
-            Messages.sendError("0005", event.getTextChannel());
+            Messages.sendError("0005", event.getChannel());
             return;
         }
 
         if (!Check.Perms(Permission.VOICE_MOVE_OTHERS, event.getMember(), event.getGuild())){
-            Messages.sendError("0001", event.getTextChannel());
+            Messages.sendError("0001", event.getChannel());
         }
 
         String idorname = args[0];
@@ -44,7 +44,7 @@ public class MoveAll implements Command {
         }else if (Check.vcByName(idorname, event.getGuild())){
             aftervc = event.getGuild().getVoiceChannelsByName(idorname, false).get(0);
         }else{
-            Messages.sendError("0003", event.getTextChannel());
+            Messages.sendError("0003", event.getChannel());
             return;
         }
 
@@ -56,7 +56,7 @@ public class MoveAll implements Command {
 
         String msg = Messages.markdown("Moved Members", "Moved " + membersize + " Members from " + currentvc.getName() + " to " + aftervc.getName() + ".");
 
-        event.getTextChannel().sendMessage(msg).queue();
+        event.getChannel().sendMessage(msg).queue();
     }
 
     @Override
@@ -80,12 +80,17 @@ public class MoveAll implements Command {
     }
 
     @Override
-    public void executed(boolean safe, MessageReceivedEvent event) {
+    public boolean visible() {
+        return true;
+    }
+
+    @Override
+    public void executed(boolean safe, GuildMessageReceivedEvent event) {
 
     }
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent event) {
+    public boolean called(String[] args, GuildMessageReceivedEvent event) {
         return false;
     }
 }

@@ -48,6 +48,23 @@ public class Check {
         }
     }
 
+    public static boolean mByName(String name, Guild g){
+
+        if(g.getMembersByName(name, false).size() == 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public static boolean mByID(String id, Guild g){
+        if(g.getMemberById(id) == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     public static boolean isInteger(String numb) {
         try {
             Integer.parseInt(numb);

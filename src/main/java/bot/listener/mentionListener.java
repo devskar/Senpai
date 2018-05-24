@@ -4,7 +4,8 @@ import bot.Privat;
 import bot.Senpai.Bot;
 import bot.stuff.Messages;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 /**
@@ -16,7 +17,7 @@ import net.dv8tion.jda.core.hooks.ListenerAdapter;
 public class mentionListener extends ListenerAdapter {
 
     @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
+    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 
         if(event.getMessage().getContentDisplay().equals("@" + event.getGuild().getSelfMember().getEffectiveName())){
             EmbedBuilder eb = Messages.embed(event.getGuild().getSelfMember()).setTitle("Hi I am your Senpai")
@@ -28,7 +29,8 @@ public class mentionListener extends ListenerAdapter {
                     )
 
                     .setAuthor("Hi i am your Senpai", null, Bot.jda.getSelfUser().getAvatarUrl());
-            event.getTextChannel().sendMessage(eb.build()).queue();
+            event.getMessage().delete().queue();
+            event.getChannel().sendMessage(eb.build()).queue();
         }
 
     }

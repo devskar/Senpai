@@ -4,7 +4,7 @@ import bot.Privat;
 import bot.commands.Command;
 import bot.other.commandHandler;
 import bot.stuff.Messages;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,22 +17,27 @@ import java.util.concurrent.TimeUnit;
 public class Help implements Command {
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
 
         Command[] cmds = commandHandler.commands.values().toArray(new Command[0]);
+
+        int size = 0;
 
         if(args.length < 1){
             StringBuilder sb = new StringBuilder();
 
             sb.append("=== Help ===\n\n");
             for (Command c: cmds) {
-                sb.append("= " + c.name() + " =\n" +
-                        "[" + c.description() + "]\n");
+                if(c.visible()) {
+                    sb.append("= " + c.name() + " =\n" +
+                            "[" + c.description() + "]\n");
+                    size++;
+                }
             }
 
-            sb.append("\nLoaded " + commandHandler.commands.size() + " Commands!");
+            sb.append("\nLoaded " + size + " Commands!");
 
-            event.getTextChannel().sendMessage("```asciidoc\n" +
+            event.getChannel().sendMessage("```asciidoc\n" +
                     sb.toString() + "```").queue();
         }else{
 
@@ -42,14 +47,14 @@ public class Help implements Command {
 
             for (Command c: cmds) {
                 if (command.equalsIgnoreCase(c.name())){
-                    event.getTextChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription(Messages.markdown("Command " + c.name(), c.help())).build()).queue();
+                    event.getChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription(Messages.markdown("Command " + c.name(), c.help())).build()).queue();
                 }else{
                     i++;
                 }
             }
 
             if (i == cmds.length){
-                Messages.sendError("0003", event.getTextChannel());
+                Messages.sendError("0003", event.getChannel());
             }
         }
 
@@ -77,11 +82,16 @@ public class Help implements Command {
     }
 
     @Override
-    public void executed(boolean safe, MessageReceivedEvent event) {
+    public boolean visible() {
+        return true;
     }
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent event) {
+    public void executed(boolean safe, GuildMessageReceivedEvent event) {
+    }
+
+    @Override
+    public boolean called(String[] args, GuildMessageReceivedEvent event) {
         return false;
     }
 }

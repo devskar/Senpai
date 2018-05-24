@@ -5,7 +5,6 @@ import bot.commands.everyone.Error;
 import bot.commands.everyone.Help;
 import bot.stuff.Messages;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.Channel;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
@@ -33,6 +32,7 @@ public class Introduction extends ListenerAdapter {
                 "\n AND YEAH I KNOW MY ENGLISH IS BAD THANKS.";
 
         EmbedBuilder eb = Messages.embed(event.getGuild().getSelfMember()).setDescription(msg).setAuthor(event.getJDA().getSelfUser().getName(), null, event.getJDA().getSelfUser().getAvatarUrl());
+
 
         tc.sendMessage(eb.build()).queue();
 

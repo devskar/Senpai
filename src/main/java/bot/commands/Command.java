@@ -1,6 +1,6 @@
 package bot.commands;
 
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 /**
  * Coded by Oskar#7402
@@ -10,7 +10,7 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public interface Command {
 
-    void action(String[] args, MessageReceivedEvent event);
+    void action(String[] args, GuildMessageReceivedEvent event);
 
     String help();
 
@@ -20,8 +20,10 @@ public interface Command {
 
     String name();
 
-    void executed(boolean safe, MessageReceivedEvent event);
+    boolean visible();
 
-    boolean called(String[] args, MessageReceivedEvent event);
+    void executed(boolean safe, GuildMessageReceivedEvent event);
+
+    boolean called(String[] args, GuildMessageReceivedEvent event);
 
 }

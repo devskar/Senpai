@@ -7,7 +7,7 @@ import bot.stuff.FileManager;
 import bot.stuff.Messages;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 /**
  * Coded by Oskar#7402
@@ -20,25 +20,25 @@ public class JoinMessage implements Command {
     private static final String path = "src/main/java/bot/files/JoinMessage.txt";
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
 
         if (!Check.Perms(Permission.MANAGE_CHANNEL, event.getMember(), event.getGuild())){
-            Messages.sendError("0001", event.getTextChannel());
+            Messages.sendError("0001", event.getChannel());
             return;
         }
 
         if (args.length < 2){
-            Messages.sendError("0004", event.getTextChannel());
+            Messages.sendError("0004", event.getChannel());
             return;
         }
 
         if (!Check.isLong(args[0])){
-            Messages.sendError("0002", event.getTextChannel());
+            Messages.sendError("0002", event.getChannel());
             return;
         }
 
         if(!Check.tcByID(args[0], event.getGuild())){
-            Messages.sendError("0008", event.getTextChannel());
+            Messages.sendError("0008", event.getChannel());
             return;
         }
 
@@ -67,12 +67,17 @@ public class JoinMessage implements Command {
     }
 
     @Override
-    public void executed(boolean safe, MessageReceivedEvent event) {
+    public boolean visible() {
+        return false;
+    }
+
+    @Override
+    public void executed(boolean safe, GuildMessageReceivedEvent event) {
 
     }
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent event) {
+    public boolean called(String[] args, GuildMessageReceivedEvent event) {
         return false;
     }
 }

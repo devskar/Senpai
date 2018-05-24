@@ -5,7 +5,7 @@ import bot.commands.Command;
 import bot.stuff.Check;
 import bot.stuff.Messages;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import sun.plugin2.message.Message;
 
 import java.util.concurrent.TimeUnit;
@@ -18,32 +18,32 @@ import java.util.concurrent.TimeUnit;
 
 public class Random implements Command {
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
 
     if((args.length < 2)){
-        Messages.error(event.getTextChannel(), Messages.markdown(help(), null));
+        Messages.sendError("0004", event.getChannel());
         return;
     }
 
-    if(!(Check.isInteger(args[0]) || Check.isInteger(args[1]))){
-        Messages.error(event.getTextChannel(), Messages.markdown(help(), null));
-        return;
-    }
+        if(!(Check.isInteger(args[0]) || Check.isInteger(args[1]))){
+            Messages.sendError("0002", event.getChannel());
+            return;
+        }
 
     int min = Integer.parseInt(args[0]);
     int max = Integer.parseInt(args[1]);
 
     if(min > max){
-        Messages.error(event.getTextChannel(), help());
+        Messages.error(event.getChannel(), help());
         return;
     }
 
     java.util.Random r = new java.util.Random();
-    int randomNum = r.nextInt((max - min) + 1) + min;
+    String randomNum = String.valueOf(r.nextInt((max - min) + 1) + min);
 
 
 
-    event.getTextChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription(
+    event.getChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription(
             "\uD83C\uDFB2 Random result \n" +
                     Messages.markdown("You rolled a " + randomNum, null)).build()).queue();
     }
@@ -70,12 +70,17 @@ public class Random implements Command {
     }
 
     @Override
-    public void executed(boolean safe, MessageReceivedEvent event) {
+    public boolean visible() {
+        return true;
+    }
+
+    @Override
+    public void executed(boolean safe, GuildMessageReceivedEvent event) {
 
     }
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent event) {
+    public boolean called(String[] args, GuildMessageReceivedEvent event) {
         return false;
     }
 }

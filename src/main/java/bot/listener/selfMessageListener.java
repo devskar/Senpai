@@ -3,7 +3,8 @@ package bot.listener;
 import bot.Senpai.Bot;
 import bot.stuff.Check;
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 import java.util.concurrent.TimeUnit;
@@ -17,10 +18,10 @@ import java.util.concurrent.TimeUnit;
 public class selfMessageListener extends ListenerAdapter {
 
     @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
+    public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 
         if (event.getMessage().getAuthor() == Bot.jda.getSelfUser()){
-            if (Check.Perms( Permission.MESSAGE_MANAGE,event.getGuild().getSelfMember(), event.getGuild())) {
+            if (Check.Perms( Permission.MESSAGE_MANAGE, event.getGuild().getSelfMember(), event.getGuild())) {
                 event.getMessage().delete().queueAfter(60, TimeUnit.SECONDS);
             }
         }

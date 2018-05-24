@@ -3,7 +3,7 @@ package bot.other;
 import bot.Privat;
 import bot.stuff.Check;
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class commandParser {
 
-    public commandContainer parser(String raw, MessageReceivedEvent event) {
+    public commandContainer parser(String raw, GuildMessageReceivedEvent event) {
         String beheaded = raw.replaceFirst(Privat.Prefix, "");
         String[] splitBeheaded = beheaded.split(" ");
         String invoke = splitBeheaded[0];
@@ -46,9 +46,9 @@ public class commandParser {
         public final String[] splitBeheaded;
         public final String invoke;
         public final String[] args;
-        public final MessageReceivedEvent event;
+        public final GuildMessageReceivedEvent event;
 
-        public commandContainer(String rw, String beheaded, String[] splitBeheaded, String invoke, String[] args, MessageReceivedEvent event) {
+        public commandContainer(String rw, String beheaded, String[] splitBeheaded, String invoke, String[] args, GuildMessageReceivedEvent event) {
             this.raw = rw;
             this.beheaded = beheaded;
             this.splitBeheaded = splitBeheaded;

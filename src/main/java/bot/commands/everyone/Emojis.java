@@ -1,38 +1,52 @@
 package bot.commands.everyone;
 
 import bot.Privat;
-import bot.Senpai.Bot;
 import bot.commands.Command;
 import bot.stuff.Messages;
-import bot.stuff.Stats;
 import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Emote;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
 
 /**
  * Coded by Oskar#7402
- * At 11.05.2018
+ * At 21.05.2018
  * github.com/oskardevkappa/
  */
 
-public class Botstats implements Command {
-
+public class Emojis implements Command{
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) {
+
+        List<Emote> emts = event.getGuild().getEmotes();
+
+        StringBuilder sbnon = new StringBuilder();
+        StringBuilder sbis = new StringBuilder();
+
         EmbedBuilder eb = Messages.embed(event.getGuild().getSelfMember());
-        eb.setTitle(Bot.jda.getSelfUser().getName() + "'s Stats");
-        eb.setThumbnail(Bot.jda.getSelfUser().getAvatarUrl());
 
-        String statsname[] = {"Guilds", "Members", "Member in VoiceChannel", "Categories", "VoiceChannels", "TextChannels", "Roles", "Emotes"};
-        int stats[] = {Stats.Guilds(), Stats.Members(), Stats.MemberInVC(), Stats.Categories(), Stats.VoiceChannels(), Stats.TextChannels(), Stats.Roles(), Stats.Emotes()};
+        for ( Emote e: emts ) {
 
-        for(int i = 0; i < statsname.length; i++){
-            eb.addField(statsname[i], String.valueOf(stats[i]), true);
+            if (!e.isAnimated()){
+                sbnon.append("<:" + e.getName() + ":" + e.getId() + "> ");
+            }else {
+                sbis.append("<:" + e.getName() + ":" + e.getId() + "> ");
+            }
         }
+
+        if (sbis.toString().equals(""))
+            sbis.append("-/-");
+        if (sbnon.toString().equals(""))
+            sbnon.append("-/-");
+
+        eb.setTitle("Emojis of Guild " + event.getGuild().getName());
+        eb.setThumbnail(event.getGuild().getIconUrl());
+        eb.addBlankField(false);
+        eb.addField("Non animated emojis", sbnon.toString(), false);
+        eb.addField("Animated emojis", sbis.toString(), false);
+
+
         event.getChannel().sendMessage(eb.build()).queue();
     }
 
@@ -43,7 +57,7 @@ public class Botstats implements Command {
 
     @Override
     public String description() {
-        return "Gives you the statistics of the Senpai bot.";
+        return "Gives you a list of all custom emojis from your guild.";
     }
 
     @Override
@@ -53,7 +67,7 @@ public class Botstats implements Command {
 
     @Override
     public String name() {
-        return "botstats";
+        return "emojis";
     }
 
     @Override
@@ -70,6 +84,4 @@ public class Botstats implements Command {
     public boolean called(String[] args, GuildMessageReceivedEvent event) {
         return false;
     }
-
-
 }

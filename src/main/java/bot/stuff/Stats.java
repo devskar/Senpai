@@ -3,6 +3,9 @@ package bot.stuff;
 import bot.Senpai.Bot;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.TextChannel;
+import net.dv8tion.jda.core.entities.VoiceChannel;
 
 /**
  * Coded by Oskar#7402
@@ -53,7 +56,9 @@ public class Stats {
     public static int MemberInVC(){
         int i = 0;
         for (Guild g : jda.getGuilds()){
-            i = i + g.getVoiceStates().size();
+            for(VoiceChannel vc: g.getVoiceChannels()){
+                i = i + vc.getMembers().size();
+            }
         }
         return i;
     }

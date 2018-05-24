@@ -5,7 +5,7 @@ import bot.commands.Command;
 import bot.stuff.Check;
 import bot.stuff.FileManager;
 import bot.stuff.Messages;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,11 +21,11 @@ public class Error implements Command {
     private static final String path = "src/main/java/bot/files/Errors.txt";
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
 
 
         if(args.length < 1){
-            Messages.sendError("0004", event.getTextChannel());
+            Messages.sendError("0004", event.getChannel());
             return;
         }
 
@@ -46,12 +46,12 @@ public class Error implements Command {
                     sb.append(Error[i] + " ");
                 }
 
-                event.getTextChannel().sendMessage(Messages.markdown("Error#" + args[0], sb.toString().replace(args[0], ""))).queue();
+                event.getChannel().sendMessage(Messages.markdown("Error#" + args[0], sb.toString().replace(args[0], ""))).queue();
             }else{
-                Messages.sendError("0003", event.getTextChannel());
+                Messages.sendError("0003", event.getChannel());
             }
         }else{
-            Messages.sendError("0002", event.getTextChannel());
+            Messages.sendError("0002", event.getChannel());
         }
 
     }
@@ -77,12 +77,17 @@ public class Error implements Command {
     }
 
     @Override
-    public void executed(boolean safe, MessageReceivedEvent event) {
+    public boolean visible() {
+        return true;
+    }
+
+    @Override
+    public void executed(boolean safe, GuildMessageReceivedEvent event) {
 
     }
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent event) {
+    public boolean called(String[] args, GuildMessageReceivedEvent event) {
         return false;
     }
 }

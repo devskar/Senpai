@@ -8,7 +8,7 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageHistory;
 import net.dv8tion.jda.core.entities.TextChannel;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -21,13 +21,18 @@ import java.util.concurrent.TimeUnit;
 
 public class Clear implements Command {
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
 
-        TextChannel tc = event.getTextChannel();
+        TextChannel tc = event.getChannel();
 
+
+        if(args.length < 1){
+            Messages.sendError("0004", event.getChannel());
+
+        }
 
         if (!Check.isInteger(args[0])){
-            Messages.sendError("0002", event.getTextChannel());
+            Messages.sendError("0002", event.getChannel());
             return;
         }
 
@@ -80,12 +85,17 @@ public class Clear implements Command {
     }
 
     @Override
-    public void executed(boolean safe, MessageReceivedEvent event) {
+    public boolean visible() {
+        return true;
+    }
+
+    @Override
+    public void executed(boolean safe, GuildMessageReceivedEvent event) {
 
     }
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent event) {
+    public boolean called(String[] args, GuildMessageReceivedEvent event) {
         return false;
     }
 }

@@ -1,7 +1,7 @@
 package bot.commands.everyone;
 
 import bot.commands.Command;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 /**
  * Coded by Oskar#7402
@@ -11,16 +11,16 @@ import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 public class Test implements Command{
     @Override
-    public void action(String[] args, MessageReceivedEvent event) {
+    public void action(String[] args, GuildMessageReceivedEvent event) {
 
         if (args.length < 0)
-            event.getTextChannel().sendMessage("<0").queue();
+            event.getChannel().sendMessage("<0").queue();
 
         if (args.length < 1)
-            event.getTextChannel().sendMessage("<1").queue();
+            event.getChannel().sendMessage("<1").queue();
 
         if (args.length == 1)
-            event.getTextChannel().sendMessage("==1").queue();
+            event.getChannel().sendMessage("==1").queue();
 
     }
 
@@ -45,12 +45,17 @@ public class Test implements Command{
     }
 
     @Override
-    public void executed(boolean safe, MessageReceivedEvent event) {
+    public boolean visible() {
+        return false;
+    }
+
+    @Override
+    public void executed(boolean safe, GuildMessageReceivedEvent event) {
 
     }
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent event) {
+    public boolean called(String[] args, GuildMessageReceivedEvent event) {
         return false;
     }
 }
