@@ -1,3 +1,4 @@
+
 package bot.Senpai;
 
 import bot.Privat;
@@ -6,6 +7,7 @@ import bot.commands.everyone.Error;
 import bot.commands.moderator.Clear;
 import bot.commands.moderator.MoveAll;
 import bot.commands.owner.Guilds;
+import bot.commands.owner.dbtest;
 import bot.commands.owner.getInvite;
 import bot.listener.*;
 import bot.other.GameHandler;
@@ -31,6 +33,8 @@ public class Bot {
 
     public static void main(String args[]){
 
+        new database().Connect();
+
         builder = new JDABuilder(AccountType.BOT)
                 .setAutoReconnect(true)
                 .setToken(Privat.TOKEN);
@@ -43,7 +47,6 @@ public class Bot {
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
-
         GameHandler.start();
     }
 
@@ -64,6 +67,7 @@ public class Bot {
         commandHandler.commands.put(new getInvite().name(), new getInvite());
         //commandHandler.commands.put("eval", new Eval());
         commandHandler.commands.put(new Perms().name(), new Perms());
+        commandHandler.commands.put(new dbtest().name(), new dbtest());
     }
 
     public static void addListener(){
@@ -72,7 +76,6 @@ public class Bot {
                 new mentionListener(),
                 new selfMessageListener(),
                 new Introduction(),
-                new evalListener(),
                 new invisibleListener()
                 /*,
                 new InsertStats()*/);
