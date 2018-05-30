@@ -2,7 +2,6 @@ package bot.commands.owner;
 
 import bot.Privat;
 import bot.commands.Command;
-import bot.commands.everyone.Invite;
 import bot.stuff.Check;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
@@ -52,13 +51,4 @@ public class getInvite implements Command {
         return false;
     }
 
-    @Override
-    public void executed(boolean safe, GuildMessageReceivedEvent event) {
-
-    }
-
-    @Override
-    public boolean called(String[] args, GuildMessageReceivedEvent event) {
-        return false;
-    }
 }

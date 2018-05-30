@@ -1,6 +1,5 @@
 package bot.commands.owner;
 
-import bot.Senpai.Bot;
 import bot.commands.Command;
 import bot.stuff.Check;
 import net.dv8tion.jda.core.MessageBuilder;
@@ -98,13 +97,4 @@ public class Eval implements Command {
         return true;
     }
 
-    @Override
-    public void executed(boolean safe, GuildMessageReceivedEvent event) {
-
-    }
-
-    @Override
-    public boolean called(String[] args, GuildMessageReceivedEvent event) {
-        return false;
-    }
 }

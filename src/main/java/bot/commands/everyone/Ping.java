@@ -8,7 +8,7 @@ import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 /**
  * Coded by Oskar#7402
- * At 08.05.2018
+ * At 29.05.2018
  * github.com/oskardevkappa/
  */
 
@@ -32,7 +32,7 @@ public class Ping implements Command {
 
     @Override
     public String[] alias() {
-        return new String[0];
+        return new String[]{"connection", "conn"};
     }
 
     @Override
@@ -45,13 +45,4 @@ public class Ping implements Command {
         return true;
     }
 
-    @Override
-    public void executed(boolean safe, GuildMessageReceivedEvent event) {
-
-    }
-
-    @Override
-    public boolean called(String[] args, GuildMessageReceivedEvent event) {
-        return false;
-    }
 }

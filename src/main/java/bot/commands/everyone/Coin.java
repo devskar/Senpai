@@ -1,26 +1,37 @@
-package bot.commands.owner;
+package bot.commands.everyone;
 
-import bot.Senpai.database;
 import bot.commands.Command;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Coded by Oskar#7402
- * At 24.05.2018
+ * At 30.05.2018
  * github.com/oskardevkappa/
  */
 
-public class dbtest implements Command {
+public class Coin implements Command {
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) {
 
-        for (Guild g : event.getJDA().getGuilds()) {
-            for (Member m : g.getMembers()) {
-                new database().writeUser(m.getUser());
-            }
-        }
+        ThreadLocalRandom r = ThreadLocalRandom.current();
+
+        int i = r.nextInt(1, 2);
+
+        String answere = null;
+
+        if (i == 1)
+            answere = "Yes";
+        if (i == 2)
+            answere = "No";
+
+
+
+        event.getChannel().sendMessage(answere).queue();
+
+
+
     }
 
     @Override
@@ -30,22 +41,21 @@ public class dbtest implements Command {
 
     @Override
     public String description() {
-        return null;
+        return "Gives you a yes no answer!";
     }
 
     @Override
     public String[] alias() {
-        return new String[0];
+        return new String[]{"flip", "coinflip", "yn", "flipcoin"};
     }
 
     @Override
     public String name() {
-        return "dbtest";
+        return "coin";
     }
 
     @Override
     public boolean visible() {
         return false;
     }
-
 }

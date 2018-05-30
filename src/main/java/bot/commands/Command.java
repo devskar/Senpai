@@ -22,8 +22,5 @@ public interface Command {
 
     boolean visible();
 
-    void executed(boolean safe, GuildMessageReceivedEvent event);
-
-    boolean called(String[] args, GuildMessageReceivedEvent event);
 
 }

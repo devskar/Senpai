@@ -79,4 +79,48 @@ public class FileManager {
         }
 
     }
+
+    public static int lineCount(String path){
+
+        int lines = 0;
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(path));
+
+            while (br.readLine() != null) {
+                lines++;
+            }
+         return lines;
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public static String getLine(String path, int line){
+
+        int i = 0;
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            while(i != line){
+                br.readLine();
+                i++;
+            }
+
+            if (i == line){
+                return br.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

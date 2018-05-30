@@ -11,43 +11,48 @@ import java.util.List;
 
 /**
  * Coded by Oskar#7402
- * At 21.05.2018
+ * At 28.05.2018
  * github.com/oskardevkappa/
  */
 
-public class Emojis implements Command{
+public class Emotes implements Command {
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) {
 
+        //Creating a List with all Emotes of the guild
         List<Emote> emts = event.getGuild().getEmotes();
 
+        //2 StringBuilder. 1 for the animated and one for the normal Emotes
         StringBuilder sbnon = new StringBuilder();
         StringBuilder sbis = new StringBuilder();
 
-        EmbedBuilder eb = Messages.embed(event.getGuild().getSelfMember());
-
+        //Checking which are animated and which are not
         for ( Emote e: emts ) {
 
             if (!e.isAnimated()){
-                sbnon.append("<:" + e.getName() + ":" + e.getId() + "> ");
+                sbnon.append("<:").append(e.getName()).append(":").append(e.getId()).append("> ");
             }else {
-                sbis.append("<:" + e.getName() + ":" + e.getId() + "> ");
+                sbis.append("<:").append(e.getName()).append(":").append(e.getId()).append("> ");
             }
         }
 
+        //Adding a mark if there are no emojis
         if (sbis.toString().equals(""))
             sbis.append("-/-");
         if (sbnon.toString().equals(""))
             sbnon.append("-/-");
 
-        eb.setTitle("Emojis of Guild " + event.getGuild().getName());
+        //Initializing an EmbedBuilder and adding things
+        EmbedBuilder eb = Messages.embed(event.getGuild().getSelfMember());
+        eb.setTitle("Emotes of Guild " + event.getGuild().getName());
         eb.setThumbnail(event.getGuild().getIconUrl());
         eb.addBlankField(false);
-        eb.addField("Non animated emojis", sbnon.toString(), false);
-        eb.addField("Animated emojis", sbis.toString(), false);
+        eb.addField("Non animated emotes", sbnon.toString(), false);
+        eb.addField("Animated emotes", sbis.toString(), false);
 
-
+        //And sending this shit
         event.getChannel().sendMessage(eb.build()).queue();
+
     }
 
     @Override
@@ -62,12 +67,12 @@ public class Emojis implements Command{
 
     @Override
     public String[] alias() {
-        return new String[0];
+        return new String[]{"Emotes", "Reactions"};
     }
 
     @Override
     public String name() {
-        return "emojis";
+        return "Emtoes";
     }
 
     @Override
@@ -75,13 +80,4 @@ public class Emojis implements Command{
         return true;
     }
 
-    @Override
-    public void executed(boolean safe, GuildMessageReceivedEvent event) {
-
-    }
-
-    @Override
-    public boolean called(String[] args, GuildMessageReceivedEvent event) {
-        return false;
-    }
 }

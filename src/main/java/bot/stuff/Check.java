@@ -58,7 +58,7 @@ public class Check {
     }
 
     public static boolean mByID(String id, Guild g){
-        if(g.getMemberById(id) == null){
+        if(g.getMemberById(Long.getLong(id)) == null){
             return false;
         }else{
             return true;

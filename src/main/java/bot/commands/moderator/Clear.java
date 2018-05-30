@@ -11,7 +11,6 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Coded by Oskar#7402
@@ -25,12 +24,13 @@ public class Clear implements Command {
 
         TextChannel tc = event.getChannel();
 
-
+        //Checking length
         if(args.length < 1){
             Messages.sendError("0004", event.getChannel());
 
         }
 
+        //Checking if the provided number is an integer
         if (!Check.isInteger(args[0])){
             Messages.sendError("0002", event.getChannel());
             return;
@@ -38,6 +38,7 @@ public class Clear implements Command {
 
         int amount = Integer.parseInt(args[0]);
 
+        //Amount needs to be between 2 and 100 soo here are the checks
         if (!(amount > 1)){
             Messages.sendError("0007", tc);
             return;
@@ -48,18 +49,21 @@ public class Clear implements Command {
             return;
         }
 
+        //Check Permission
         if (!Check.Perms(Permission.MESSAGE_MANAGE, event.getMember(), event.getGuild())){
             Messages.sendError("0001", tc);
             return;
         }
 
+        //Deleting the message the user send so it's doesn't count for the clear amount
         event.getMessage().delete().queue();
 
+        //Delete the Messages
         MessageHistory history = tc.getHistory();
         List<Message> msgs = history.retrievePast(amount).complete();
         tc.deleteMessages(msgs).queue();
 
-        String msg = Messages.markdown("Successfully deleted Messages", "Deleted " + msgs.size() + " Messages in " + tc.getName() + ".");
+        String msg = Messages.markdown("Successfully deleted Messages", "Deleted " + msgs.size() + " Messages in #" + tc.getName() + ".");
         tc.sendMessage(msg).queue();
 
     }
@@ -76,7 +80,7 @@ public class Clear implements Command {
 
     @Override
     public String[] alias() {
-        return new String[0];
+        return new String[]{"c", "purge"};
     }
 
     @Override
@@ -89,13 +93,4 @@ public class Clear implements Command {
         return true;
     }
 
-    @Override
-    public void executed(boolean safe, GuildMessageReceivedEvent event) {
-
-    }
-
-    @Override
-    public boolean called(String[] args, GuildMessageReceivedEvent event) {
-        return false;
-    }
 }

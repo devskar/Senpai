@@ -4,15 +4,13 @@ import bot.Privat;
 import bot.commands.Command;
 import bot.stuff.Check;
 import bot.stuff.Messages;
-import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
-import sun.plugin2.message.Message;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Arrays;
 
 /**
  * Coded by Oskar#7402
- * At 08.05.2018
+ * At 29.05.2018
  * github.com/oskardevkappa/
  */
 
@@ -20,32 +18,38 @@ public class Random implements Command {
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) {
 
-    if((args.length < 2)){
-        Messages.sendError("0004", event.getChannel());
-        return;
-    }
 
+        //Checking if all arguments are given
+        if((args.length < 2)){
+            Messages.sendError("0004", event.getChannel());
+            return;
+        }
+
+        //Checking if both are integers
         if(!(Check.isInteger(args[0]) || Check.isInteger(args[1]))){
             Messages.sendError("0002", event.getChannel());
             return;
         }
 
-    int min = Integer.parseInt(args[0]);
-    int max = Integer.parseInt(args[1]);
+        //Setting up some variables
+        int min = Integer.parseInt(args[0]);
+        int max = Integer.parseInt(args[1]);
 
-    if(min > max){
-        Messages.error(event.getChannel(), help());
-        return;
-    }
+        //Yeah I hope you understand what im doing here
+        if(min > max){
+            Messages.error(event.getChannel(), help());
+            return;
+        }
 
-    java.util.Random r = new java.util.Random();
-    String randomNum = String.valueOf(r.nextInt((max - min) + 1) + min);
+        //Getting a random numer in the range of min max
+        java.util.Random r = new java.util.Random();
+        String randomNum = String.valueOf(r.nextInt((max - min) + 1) + min);
 
+        //Sends the number
+        event.getChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription(
+                "\uD83C\uDFB2 Random result \n" +
+                        Messages.markdown("You rolled a " + randomNum, null)).build()).queue();
 
-
-    event.getChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription(
-            "\uD83C\uDFB2 Random result \n" +
-                    Messages.markdown("You rolled a " + randomNum, null)).build()).queue();
     }
 
     @Override
@@ -60,7 +64,7 @@ public class Random implements Command {
 
     @Override
     public String[] alias() {
-        String[] abc = {"rndm", "random", "dice"};
+        String[] abc = {"rndm", "dice"};
         return abc;
     }
 
@@ -74,13 +78,4 @@ public class Random implements Command {
         return true;
     }
 
-    @Override
-    public void executed(boolean safe, GuildMessageReceivedEvent event) {
-
-    }
-
-    @Override
-    public boolean called(String[] args, GuildMessageReceivedEvent event) {
-        return false;
-    }
 }

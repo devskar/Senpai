@@ -2,19 +2,19 @@
 package bot.Senpai;
 
 import bot.Privat;
-import bot.commands.everyone.*;
+
+import bot.commands.Command;
 import bot.commands.everyone.Error;
 import bot.commands.moderator.Clear;
 import bot.commands.moderator.MoveAll;
-import bot.commands.owner.Guilds;
-import bot.commands.owner.dbtest;
-import bot.commands.owner.getInvite;
 import bot.listener.*;
-import bot.other.GameHandler;
-import bot.other.commandHandler;
+import bot.commands.everyone.*;
+import bot.other.CommandManager;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.entities.Game;
+import sun.awt.geom.AreaOp;
 
 import javax.security.auth.login.LoginException;
 
@@ -47,36 +47,37 @@ public class Bot {
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
-        GameHandler.start();
+
+        jda.getPresence().setGame(Game.playing("on beta"));
     }
 
     public static void addCommands(){
-        commandHandler.commands.put(new Help().name(), new Help());
-        commandHandler.commands.put(new Ping().name(), new Ping());
-        commandHandler.commands.put(new Random().name(), new Random());
-        commandHandler.commands.put(new Invite().name(), new Invite());
-        commandHandler.commands.put(new Error().name(), new Error());
-        commandHandler.commands.put(new MoveAll().name(), new MoveAll());
-        commandHandler.commands.put(new Clear().name(), new Clear());
-        commandHandler.commands.put(new Botstats().name(), new Botstats());
-        commandHandler.commands.put(new User().name(), new User());
-/*        commandHandler.commands.put(new JoinMessage().name(), new JoinMessage());*/
-        commandHandler.commands.put("test", new Test());
-        commandHandler.commands.put(new Emojis().name(), new Emojis());
-        commandHandler.commands.put(new Guilds().name(), new Guilds());
-        commandHandler.commands.put(new getInvite().name(), new getInvite());
-        //commandHandler.commands.put("eval", new Eval());
-        commandHandler.commands.put(new Perms().name(), new Perms());
-        commandHandler.commands.put(new dbtest().name(), new dbtest());
+
+        CommandManager.commands.add(new Botstats());
+        CommandManager.commands.add(new Emotes());
+        CommandManager.commands.add(new Error());
+        CommandManager.commands.add(new Help());
+        CommandManager.commands.add(new Invite());
+        CommandManager.commands.add(new Perms());
+        CommandManager.commands.add(new Ping());
+        CommandManager.commands.add(new Random());
+        CommandManager.commands.add(new Clear());
+        CommandManager.commands.add(new Friends());
+        CommandManager.commands.add(new MoveAll());
+        CommandManager.commands.add(new Banner());
+        CommandManager.commands.add(new User());
+        CommandManager.commands.add(new Coin());
+        CommandManager.commands.add(new YoMamma());
+
     }
 
     public static void addListener(){
         builder.addEventListener(
-                new commandListener(),
+                new CommandManager(),
                 new mentionListener(),
-                new selfMessageListener(),
-                new Introduction(),
-                new invisibleListener()
+                //new selfMessageListener(),
+                new Introduction()
+                //new invisibleListener()
                 /*,
                 new InsertStats()*/);
     }

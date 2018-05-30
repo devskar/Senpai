@@ -9,7 +9,7 @@ import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Objects;
 
 /**
  * Coded by Oskar#7402
@@ -21,23 +21,27 @@ public class MoveAll implements Command {
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) {
 
+        ///Checking length
         if (args.length < 1){
             Messages.sendError("0004", event.getChannel());
             return;
         }
 
+        //Checking if the Member is in an VoiceChannel
         if (!event.getMember().getVoiceState().inVoiceChannel()){
             Messages.sendError("0005", event.getChannel());
             return;
         }
 
+        //Checking the Permission
         if (!Check.Perms(Permission.VOICE_MOVE_OTHERS, event.getMember(), event.getGuild())){
             Messages.sendError("0001", event.getChannel());
         }
 
+        //I'm now checking if the VoiceChannel exists
         String idorname = args[0];
         VoiceChannel currentvc = event.getMember().getVoiceState().getChannel();
-        VoiceChannel aftervc = null;
+        VoiceChannel aftervc;
 
         if (Check.vcByID(idorname, event.getGuild())){
             aftervc = event.getGuild().getVoiceChannelById(idorname);
@@ -50,13 +54,14 @@ public class MoveAll implements Command {
 
         String membersize = String.valueOf(currentvc.getMembers().size());
 
+
+        //Move da bois
         for (Member m : currentvc.getMembers()) {
             event.getGuild().getController().moveVoiceMember(m, aftervc).queue();
         }
 
-        String msg = Messages.markdown("Moved Members", "Moved " + membersize + " Members from " + currentvc.getName() + " to " + aftervc.getName() + ".");
-
-        event.getChannel().sendMessage(msg).queue();
+        //Send Message
+        event.getChannel().sendMessage(Objects.requireNonNull(Messages.markdown("Moved Members", "Moved " + membersize + " Members from " + currentvc.getName() + " to " + aftervc.getName() + "."))).queue();
     }
 
     @Override
@@ -71,7 +76,7 @@ public class MoveAll implements Command {
 
     @Override
     public String[] alias() {
-        return new String[0];
+        return new String[]{"ma", "movea"};
     }
 
     @Override
@@ -84,13 +89,4 @@ public class MoveAll implements Command {
         return true;
     }
 
-    @Override
-    public void executed(boolean safe, GuildMessageReceivedEvent event) {
-
-    }
-
-    @Override
-    public boolean called(String[] args, GuildMessageReceivedEvent event) {
-        return false;
-    }
 }

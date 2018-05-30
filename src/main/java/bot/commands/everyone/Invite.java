@@ -9,7 +9,7 @@ import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 /**
  * Coded by Oskar#7402
- * At 10.05.2018
+ * At 29.05.2018
  * github.com/oskardevkappa/
  */
 
@@ -18,12 +18,20 @@ public class Invite implements Command {
     public void action(String[] args, GuildMessageReceivedEvent event) {
 
         Guild g = event.getGuild();
+
+        //Just checking if the user is allowed to create an invite
         if (Check.Perms(Permission.CREATE_INSTANT_INVITE, event.getMember(), event.getGuild())) {
+
+            //Creating the invite and get the Url
             String inv = g.getTextChannels().get(0).createInvite().setMaxAge(0).complete().getURL();
-            event.getChannel().sendMessage(inv).queue();
+
+            //Send the invite
+            event.getChannel().sendMessage("Here is your invite " + event.getMember().getAsMention() + " " + inv).queue();
         } else{
+
             event.getChannel().sendMessage("Error#0001").queue();
         }
+
     }
 
     @Override
@@ -38,7 +46,7 @@ public class Invite implements Command {
 
     @Override
     public String[] alias() {
-        return new String[0];
+        return new String[]{"inv"};
     }
 
     @Override
@@ -49,15 +57,5 @@ public class Invite implements Command {
     @Override
     public boolean visible() {
         return true;
-    }
-
-    @Override
-    public void executed(boolean safe, GuildMessageReceivedEvent event) {
-
-    }
-
-    @Override
-    public boolean called(String[] args, GuildMessageReceivedEvent event) {
-        return false;
     }
 }

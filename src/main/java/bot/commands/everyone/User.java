@@ -10,7 +10,6 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
-import java.awt.*;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -54,7 +53,7 @@ public class User implements Command {
 
     @Override
     public String[] alias() {
-        return new String[0];
+        return new String[]{"member"};
     }
 
     @Override
@@ -67,15 +66,6 @@ public class User implements Command {
         return true;
     }
 
-    @Override
-    public void executed(boolean safe, GuildMessageReceivedEvent event) {
-
-    }
-
-    @Override
-    public boolean called(String[] args, GuildMessageReceivedEvent event) {
-        return false;
-    }
 
     public class UserInfo {
 

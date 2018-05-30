@@ -6,7 +6,6 @@ import bot.stuff.Check;
 import bot.stuff.FileManager;
 import bot.stuff.Messages;
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 /**
@@ -71,13 +70,4 @@ public class JoinMessage implements Command {
         return false;
     }
 
-    @Override
-    public void executed(boolean safe, GuildMessageReceivedEvent event) {
-
-    }
-
-    @Override
-    public boolean called(String[] args, GuildMessageReceivedEvent event) {
-        return false;
-    }
 }

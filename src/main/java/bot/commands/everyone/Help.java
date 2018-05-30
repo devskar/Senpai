@@ -2,58 +2,93 @@ package bot.commands.everyone;
 
 import bot.Privat;
 import bot.commands.Command;
-import bot.other.commandHandler;
+import bot.other.CommandManager;
 import bot.stuff.Messages;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Coded by Oskar#7402
- * At 09.05.2018
+ * At 28.05.2018
  * github.com/oskardevkappa/
  */
 
 public class Help implements Command {
-
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) {
 
-        Command[] cmds = commandHandler.commands.values().toArray(new Command[0]);
+
+        List<Command> cmds = CommandManager.commands;
+
 
         int size = 0;
 
-        if(args.length < 1){
+        //Checking if any arguments are given
+        if(args.length == 0){
             StringBuilder sb = new StringBuilder();
 
             sb.append("=== Help ===\n\n");
             for (Command c: cmds) {
+                //Checks if the command should be shown
                 if(c.visible()) {
+                    //Adding all commands
                     sb.append("= " + c.name() + " =\n" +
-                            "[" + c.description() + "]\n");
+                            "[" + c.description() + "]\n" +
+                            "Aliases: " + Arrays.toString(c.alias()).toLowerCase() + "\n\n");
                     size++;
                 }
             }
 
             sb.append("\nLoaded " + size + " Commands!");
 
+
+            //Sending help message
             event.getChannel().sendMessage("```asciidoc\n" +
                     sb.toString() + "```").queue();
-        }else{
 
+        }else{
+            //here we go to the help Message foreach command
             String command =  args[0];
 
             int i = 0;
-
+            int x = 0;
+            //Now we looking throw each command and all his aliases
             for (Command c: cmds) {
-                if (command.equalsIgnoreCase(c.name())){
-                    event.getChannel().sendMessage(Messages.embed(event.getGuild().getSelfMember()).setDescription(Messages.markdown("Command " + c.name(), c.help())).build()).queue();
-                }else{
-                    i++;
+
+                //Creating a list and paste every name of a command in there
+                List<String> all = new ArrayList<>();
+                all.addAll(Arrays.asList(c.alias()));
+                all.add(c.name());
+
+                //Now we lookin for all of these commands and if there is a match we send the help message
+                for (String cmd : all ) {
+                    x++;
+                    if (command.equalsIgnoreCase(cmd)) {
+
+                        StringBuilder sb = new StringBuilder();
+
+                        sb.append("=== Help for " + c.name() + "===\n\n");
+
+                        sb.append("Usage: \n[" + c.help() + "]\n\n" +
+                                  "Description: \n[" + c.description() + "]\n\n" +
+                                  "Aliases: \n" + Arrays.toString(c.alias()).toLowerCase() + "\n\n");
+
+                        //Sending help message
+                        event.getChannel().sendMessage("```asciidoc\n" +
+                                sb.toString() + "```").queue();
+
+                    } else {
+                        //We are adding a number here so we can check if we ran throw all commands
+                        i++;
+                    }
                 }
             }
 
-            if (i == cmds.length){
+            //Check it
+            if (i == x){
                 Messages.sendError("0003", event.getChannel());
             }
         }
@@ -86,12 +121,4 @@ public class Help implements Command {
         return true;
     }
 
-    @Override
-    public void executed(boolean safe, GuildMessageReceivedEvent event) {
-    }
-
-    @Override
-    public boolean called(String[] args, GuildMessageReceivedEvent event) {
-        return false;
-    }
 }

@@ -58,6 +58,9 @@ public class Stats {
         for (Guild g : jda.getGuilds()){
             for(VoiceChannel vc: g.getVoiceChannels()){
                 i = i + vc.getMembers().size();
+                for(Member m : vc.getMembers()){
+                    System.out.println(m.getGuild().getName() + " - " + m.getEffectiveName());
+                }
             }
         }
         return i;

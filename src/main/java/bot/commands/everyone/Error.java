@@ -7,28 +7,28 @@ import bot.stuff.FileManager;
 import bot.stuff.Messages;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
-import java.util.concurrent.TimeUnit;
-
-
 /**
  * Coded by Oskar#7402
- * At 10.05.2018
+ * At 28.05.2018
  * github.com/oskardevkappa/
  */
 
 public class Error implements Command {
+
+    // TODO: 29.05.2018 Adding Comments
 
     private static final String path = "src/main/java/bot/files/Errors.txt";
 
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) {
 
-
+        //Checking if all arguments are given
         if(args.length < 1){
             Messages.sendError("0004", event.getChannel());
             return;
         }
 
+        //Just if somebody writes the whole error
         if(args[0].contains("#")){
             args[0].replace("#", "");
         }
@@ -66,28 +66,19 @@ public class Error implements Command {
         return "Gives you a description of an error.";
     }
 
+
     @Override
     public String[] alias() {
-        return new String[0];
+        return new String[]{"Err"};
     }
 
     @Override
     public String name() {
-        return "error";
+        return "Error";
     }
 
     @Override
     public boolean visible() {
         return true;
-    }
-
-    @Override
-    public void executed(boolean safe, GuildMessageReceivedEvent event) {
-
-    }
-
-    @Override
-    public boolean called(String[] args, GuildMessageReceivedEvent event) {
-        return false;
     }
 }

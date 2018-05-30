@@ -38,9 +38,8 @@ public class Messages {
     }
 
     public static String markdown(String title, String text){
-        System.out.println(text);
+
         String content = text;
-        System.out.println(content);
 
         if (content != null) {
 

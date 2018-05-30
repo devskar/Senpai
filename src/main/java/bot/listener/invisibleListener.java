@@ -17,7 +17,7 @@ public class invisibleListener extends ListenerAdapter {
 
         if(event.getMember().getOnlineStatus() == OnlineStatus.OFFLINE){
 
-            event.getChannel().sendMessage("How can u write while you are offline? " + event.getMember().getAsMention()).queue();
+            event.getChannel().sendMessage("It's not cool to hide from stalkers. " + event.getMember().getAsMention()).queue();
 
         }
 
