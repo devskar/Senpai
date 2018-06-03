@@ -17,7 +17,7 @@ public class Error implements Command {
 
     // TODO: 29.05.2018 Adding Comments
 
-    private static final String path = "src/main/java/bot/files/Errors.txt";
+    private static final String path = "src/main/files/Errors.txt";
 
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) {
@@ -32,8 +32,8 @@ public class Error implements Command {
         if(args[0].contains("#")){
             args[0].replace("#", "");
         }
-        if(args[0].contains("Error")){
-            args[0].replace("Error", "");
+        if(args[0].toLowerCase().contains("error")){
+            args[0].replaceAll("(?i)" + "Error", "");
         }
 
         if (Check.isInteger(args[0])){

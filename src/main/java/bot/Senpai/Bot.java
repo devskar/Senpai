@@ -7,6 +7,8 @@ import bot.commands.Command;
 import bot.commands.everyone.Error;
 import bot.commands.moderator.Clear;
 import bot.commands.moderator.MoveAll;
+import bot.commands.owner.Guilds;
+import bot.commands.owner.PN;
 import bot.listener.*;
 import bot.commands.everyone.*;
 import bot.other.CommandManager;
@@ -68,6 +70,9 @@ public class Bot {
         CommandManager.commands.add(new User());
         CommandManager.commands.add(new Coin());
         CommandManager.commands.add(new YoMamma());
+        CommandManager.commands.add(new Pastebincom());
+        CommandManager.commands.add(new PN());
+        CommandManager.commands.add(new Guilds());
 
     }
 
@@ -76,7 +81,9 @@ public class Bot {
                 new CommandManager(),
                 new mentionListener(),
                 //new selfMessageListener(),
-                new Introduction()
+                new Introduction(),
+                new Conversatioin(),
+                new PrivateMessage()
                 //new invisibleListener()
                 /*,
                 new InsertStats()*/);

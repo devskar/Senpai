@@ -35,7 +35,7 @@ public class Help implements Command {
                 //Checks if the command should be shown
                 if(c.visible()) {
                     //Adding all commands
-                    sb.append("= " + c.name() + " =\n" +
+                    sb.append("= " + c.name().toLowerCase() + " =\n" +
                             "[" + c.description() + "]\n" +
                             "Aliases: " + Arrays.toString(c.alias()).toLowerCase() + "\n\n");
                     size++;
@@ -70,7 +70,7 @@ public class Help implements Command {
 
                         StringBuilder sb = new StringBuilder();
 
-                        sb.append("=== Help for " + c.name() + "===\n\n");
+                        sb.append("=== Help for " + c.name().toLowerCase() + "===\n\n");
 
                         sb.append("Usage: \n[" + c.help() + "]\n\n" +
                                   "Description: \n[" + c.description() + "]\n\n" +

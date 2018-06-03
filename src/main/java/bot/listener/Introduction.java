@@ -28,7 +28,7 @@ public class Introduction extends ListenerAdapter {
                 "\nI need to send this message because you maybe don't understand how I work. " +
                 "\nI am a small but with a lot of buggs :). I am using an error system, that means if you doing a command wrong you will get (hopefully) an error with an ID (Error#ID) then you can do: `" + new Error().help() + "`." +
                 "\nand if you want to know how the command works you can do `" + Privat.Prefix + new Help().name() + " [command]`." +
-                "\nIf there are any questions left you can join my [Support Server](" + Privat.SERVERINVITE + ")." +
+                //"\nIf there are any questions left you can join my [Support Server](" + Privat.SERVERINVITE + ")." +
                 "\n AND YEAH I KNOW MY ENGLISH IS BAD THANKS.";
 
         EmbedBuilder eb = Messages.embed(event.getGuild().getSelfMember()).setDescription(msg).setAuthor(event.getJDA().getSelfUser().getName(), null, event.getJDA().getSelfUser().getAvatarUrl());

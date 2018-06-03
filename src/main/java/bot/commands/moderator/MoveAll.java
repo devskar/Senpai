@@ -66,7 +66,7 @@ public class MoveAll implements Command {
 
     @Override
     public String help() {
-        return Privat.Prefix + name() + "[VoiceChannel (id or name)]";
+        return Privat.Prefix + name() + " [VoiceChannel (id or name)]";
     }
 
     @Override
@@ -76,7 +76,7 @@ public class MoveAll implements Command {
 
     @Override
     public String[] alias() {
-        return new String[]{"ma", "movea"};
+        return new String[]{"movea"};
     }
 
     @Override

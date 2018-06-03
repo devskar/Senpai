@@ -1,8 +1,6 @@
 package bot.stuff;
 
 import java.io.*;
-import java.nio.Buffer;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
@@ -23,7 +21,7 @@ public class FileManager {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.contains(content)) {
-                    String[] out = line.split(" ");
+                    String[] out = line.split("     ");
                     return out;
                 }
             }

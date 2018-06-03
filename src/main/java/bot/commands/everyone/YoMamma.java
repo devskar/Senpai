@@ -4,6 +4,7 @@ import bot.Privat;
 import bot.commands.Command;
 import bot.stuff.FileManager;
 import bot.stuff.Messages;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -16,7 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class YoMamma implements Command {
 
-    private static final String path = "src/main/java/bot/files/YoMamma.txt";
+    private static final String path = "src/main/files/YoMamma.txt";
 
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) {
@@ -32,7 +33,9 @@ public class YoMamma implements Command {
 
         String joke = FileManager.getLine(path, line);
 
-        event.getChannel().sendMessage(joke + " " + event.getMessage().getMentionedMembers().get(0).getAsMention()).queue();
+        Member m = event.getMessage().getMentionedMembers().get(0);
+
+        event.getChannel().sendMessage(joke .replaceAll("(?)Yo", "<@" + m.getUser().getId() + ">")).queue();
     }
 
     @Override
@@ -47,12 +50,12 @@ public class YoMamma implements Command {
 
     @Override
     public String[] alias() {
-        return new String[]{"insult"};
+        return new String[]{"insult", "mum", "mom"};
     }
 
     @Override
     public String name() {
-        return "YoMamma";
+        return "mama";
     }
 
     @Override
