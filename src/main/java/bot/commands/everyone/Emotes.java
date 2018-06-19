@@ -26,13 +26,18 @@ public class Emotes implements Command {
         StringBuilder sbnon = new StringBuilder();
         StringBuilder sbis = new StringBuilder();
 
+        //Creating 2 ints to count how many emotes are animated and which are not
+        int animated = 0;
+        int nonanimated = 0;
         //Checking which are animated and which are not
         for ( Emote e: emts ) {
 
             if (!e.isAnimated()){
                 sbnon.append("<:").append(e.getName()).append(":").append(e.getId()).append("> ");
+                nonanimated++;
             }else {
                 sbis.append("<:").append(e.getName()).append(":").append(e.getId()).append("> ");
+                animated++;
             }
         }
 
@@ -44,11 +49,11 @@ public class Emotes implements Command {
 
         //Initializing an EmbedBuilder and adding things
         EmbedBuilder eb = Messages.embed(event.getGuild().getSelfMember());
-        eb.setTitle("Emotes of Guild " + event.getGuild().getName());
+
+        eb.setAuthor("Emotes of Guild " + event.getGuild().getName() + "\n");
         eb.setThumbnail(event.getGuild().getIconUrl());
-        eb.addBlankField(false);
-        eb.addField("Non animated emotes", sbnon.toString(), false);
-        eb.addField("Animated emotes", sbis.toString(), false);
+        eb.addField("Non animated emotes (" + nonanimated + ")", sbnon.toString(), false);
+        eb.addField("Animated emotes (" + animated + ")", sbis.toString(), false);
 
         //And sending this shit
         event.getChannel().sendMessage(eb.build()).queue();

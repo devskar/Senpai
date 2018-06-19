@@ -13,9 +13,8 @@ public class PrivateMessage extends ListenerAdapter {
 
     @Override
     public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
-
         if (event.getAuthor() != event.getJDA().getSelfUser()) {
-            event.getJDA().getUserById("226011931935375360").openPrivateChannel().complete().sendMessage(event.getAuthor().getName() + ": " + event.getMessage().getContentRaw()).queue();
+            event.getJDA().getUserById("226011931935375360").openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(event.getAuthor().getName() + ": " + event.getMessage().getContentRaw()).queue());
         }
     }
 }

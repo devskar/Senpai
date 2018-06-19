@@ -65,9 +65,10 @@ public class PN implements Command {
 
         msg = msg.replace(u.getId() + " ", "");
 
-        u.openPrivateChannel().complete().sendMessage(msg).queue();
-        System.out.println(msg);
-    }
+        String finalMsg = msg;
+
+        u.openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(finalMsg).queue());
+        }
 
     @Override
     public String help() {

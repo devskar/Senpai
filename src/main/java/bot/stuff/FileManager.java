@@ -21,7 +21,7 @@ public class FileManager {
             String line;
             while ((line = br.readLine()) != null) {
                 if (line.contains(content)) {
-                    String[] out = line.split("     ");
+                    String[] out = line.split(" ");
                     return out;
                 }
             }

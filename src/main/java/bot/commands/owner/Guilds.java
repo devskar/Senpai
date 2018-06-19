@@ -22,7 +22,6 @@ public class Guilds implements Command {
         if (!Check.isDev(event.getAuthor()))
             return;
 
-        PrivateChannel pc = event.getAuthor().openPrivateChannel().complete();
         StringBuilder sb = new StringBuilder();
 
         int i = 0;
@@ -38,7 +37,7 @@ public class Guilds implements Command {
                     "ID: " + g.getId() + "\n\n");
         }
 
-        pc.sendMessage(sb.toString()).queue();
+        event.getAuthor().openPrivateChannel().queue(privateChannel -> privateChannel.sendMessage(sb.toString()).queue());
 
     }
 

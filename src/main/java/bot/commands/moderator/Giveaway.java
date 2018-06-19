@@ -8,10 +8,13 @@ import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageReaction;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.core.exceptions.RateLimitedException;
+import net.dv8tion.jda.core.requests.RestAction;
 
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.function.Consumer;
 
 /**
  * Coded by Oskar#7402
@@ -20,6 +23,9 @@ import java.util.TimerTask;
  */
 
 public class Giveaway implements Command {
+
+
+
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) {
 
@@ -30,12 +36,15 @@ public class Giveaway implements Command {
         int delay = Integer.parseInt(two[2]);
         String mcount = two[1];
         String timeunit = two[3];
-
-
-        Message msg = event.getChannel().sendMessage("You can win " + price).complete();
         Emote emote = null;
-        msg.addReaction(emote).queue();
 
+        RestAction<Message> msg = event.getChannel().sendMessage("You can win " + price);
+        msg.queue();
+        try {
+            msg.complete(true);
+        } catch (RateLimitedException e) {
+            e.printStackTrace();
+        }
         List<Member> members;
 
 
@@ -45,9 +54,9 @@ public class Giveaway implements Command {
             @Override
             public void run() {
 
-                for (MessageReaction mr : msg.getReactions()){
+                /*for (MessageReaction mr : msg.getReactions()){
                     mr.getReactionEmote();
-                }
+                }*/
 
             }
         }, Util.TimeConverter(delay, timeunit));

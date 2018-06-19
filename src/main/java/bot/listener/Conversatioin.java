@@ -33,7 +33,7 @@ public class Conversatioin extends ListenerAdapter {
                     .build();
 
             String question = "Just a small town girl";
-            String answer = api.askQuestion(question);
+                String answer = api.askQuestion(question);
             System.out.println(answer);
 
         } catch (Exception e) {

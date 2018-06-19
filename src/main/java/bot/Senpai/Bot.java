@@ -3,12 +3,13 @@ package bot.Senpai;
 
 import bot.Privat;
 
-import bot.commands.Command;
 import bot.commands.everyone.Error;
 import bot.commands.moderator.Clear;
 import bot.commands.moderator.MoveAll;
 import bot.commands.owner.Guilds;
 import bot.commands.owner.PN;
+import bot.commands.owner.Say;
+import bot.commands.owner.getInvite;
 import bot.listener.*;
 import bot.commands.everyone.*;
 import bot.other.CommandManager;
@@ -16,7 +17,6 @@ import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
-import sun.awt.geom.AreaOp;
 
 import javax.security.auth.login.LoginException;
 
@@ -73,6 +73,11 @@ public class Bot {
         CommandManager.commands.add(new Pastebincom());
         CommandManager.commands.add(new PN());
         CommandManager.commands.add(new Guilds());
+        CommandManager.commands.add(new RoleAdd());
+        CommandManager.commands.add(new Say());
+        CommandManager.commands.add(new getInvite());
+        CommandManager.commands.add(new League());
+        CommandManager.commands.add(new Beta());
 
     }
 

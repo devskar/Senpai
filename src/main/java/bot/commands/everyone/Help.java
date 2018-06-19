@@ -35,14 +35,13 @@ public class Help implements Command {
                 //Checks if the command should be shown
                 if(c.visible()) {
                     //Adding all commands
-                    sb.append("= " + c.name().toLowerCase() + " =\n" +
-                            "[" + c.description() + "]\n" +
-                            "Aliases: " + Arrays.toString(c.alias()).toLowerCase() + "\n\n");
+                    sb.append("= ").append(c.name().toLowerCase()).append(" =\n").append("[").append(c.description()).append("]\n" /*+
+                            "Aliases: " + Arrays.toString(c.alias()).toLowerCase()*/).append("\n");
                     size++;
                 }
             }
 
-            sb.append("\nLoaded " + size + " Commands!");
+            sb.append("\nLoaded ").append(size).append(" Commands!");
 
 
             //Sending help message
@@ -70,7 +69,7 @@ public class Help implements Command {
 
                         StringBuilder sb = new StringBuilder();
 
-                        sb.append("=== Help for " + c.name().toLowerCase() + "===\n\n");
+                        sb.append("=== Help for " + c.name().toLowerCase() + " ===\n\n");
 
                         sb.append("Usage: \n[" + c.help() + "]\n\n" +
                                   "Description: \n[" + c.description() + "]\n\n" +

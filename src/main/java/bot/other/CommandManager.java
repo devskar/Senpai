@@ -29,11 +29,12 @@ public class CommandManager extends ListenerAdapter {
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
-        System.out.println("(" + event.getGuild().getName() + " " + event.getChannel().getName() + "" + ") " + "[" + event.getAuthor().getName() + "] " + event.getMessage().getContentRaw());
+
+        if (!event.getMember().getUser().getId().equals("443447273175908352"))
+            System.out.println("(" + event.getGuild().getName() + " " + event.getChannel().getName() + "" + ") " + "[" + event.getAuthor().getName() + "] " + event.getMessage().getContentRaw());
 
 
         for (Command cmd : commands) {
-
 
             //Adding all aliases to a List + the name because im to bored to add all the names to the aliases array
             List<String> aliases = new ArrayList<>();
@@ -51,20 +52,11 @@ public class CommandManager extends ListenerAdapter {
             //Making a String so you can wirte the command in any case you want
             String command = event.getMessage().getContentRaw();
 
-
             //Checking if the Message starts with the Command and if then executing the command
             for (String start : starts) {
                 if (command.toLowerCase().startsWith(start.toLowerCase())) {
-
-                    if(event.getGuild().getSelfMember().hasPermission(Permission.MESSAGE_MANAGE))
-                        event.getMessage().delete().queueAfter(10, TimeUnit.SECONDS);
-                    try
-                    {
                         cmd.action(argsConverter(command, start), event);
-                    }catch (Exception e)
-                    {
 
-                    }
                     if (Check.Perms(Permission.MESSAGE_MANAGE, event.getGuild().getSelfMember(), event.getGuild()))
                         event.getMessage().delete().queueAfter(1, TimeUnit.MINUTES);
 

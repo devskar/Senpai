@@ -3,7 +3,10 @@ package bot.commands.owner;
 import bot.Privat;
 import bot.commands.Command;
 import bot.stuff.Check;
+import net.dv8tion.jda.core.entities.Invite;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
+
+import java.util.function.Consumer;
 
 import static bot.Senpai.Bot.jda;
 
@@ -14,15 +17,23 @@ import static bot.Senpai.Bot.jda;
  */
 
 public class getInvite implements Command {
+
     @Override
     public void action(String[] args, GuildMessageReceivedEvent event) {
 
         if(!Check.isDev(event.getAuthor()))
             return;
 
-        net.dv8tion.jda.core.entities.Invite inv = jda.getGuildById(args[0]).getTextChannels().get(0).createInvite().setMaxAge(0).complete();
+        final String[] inv = new String[1];
 
-        event.getChannel().sendMessage(inv.getURL()).queue();
+        jda.getGuildById(args[0]).getTextChannels().get(0).createInvite().setMaxUses(1).setMaxAge(0).queue(new Consumer<Invite>() {
+            @Override
+            public void accept(Invite invite) {
+                inv[0] = invite.getURL();
+            }
+        });
+
+        event.getChannel().sendMessage(inv[0]).queue();
 
     }
 

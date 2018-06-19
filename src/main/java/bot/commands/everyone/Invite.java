@@ -7,6 +7,8 @@ import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
+import java.util.function.Consumer;
+
 /**
  * Coded by Oskar#7402
  * At 29.05.2018
@@ -23,10 +25,16 @@ public class Invite implements Command {
         if (Check.Perms(Permission.CREATE_INSTANT_INVITE, event.getMember(), event.getGuild())) {
 
             //Creating the invite and get the Url
-            String inv = g.getTextChannels().get(0).createInvite().setMaxAge(0).complete().getURL();
+            final String[] inv = new String[1];
+            g.getTextChannels().get(0).createInvite().setMaxAge(0).queue(new Consumer<net.dv8tion.jda.core.entities.Invite>() {
+                @Override
+                public void accept(net.dv8tion.jda.core.entities.Invite invite) {
+                    inv[0] = invite.getURL();
+                }
+            });
 
             //Send the invite
-            event.getChannel().sendMessage("Here is your invite " + event.getMember().getAsMention() + " " + inv).queue();
+            event.getChannel().sendMessage("Here is your invite " + event.getMember().getAsMention() + " " + inv[0]).queue();
         } else{
 
             event.getChannel().sendMessage("Error#0001").queue();

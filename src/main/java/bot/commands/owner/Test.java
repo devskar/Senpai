@@ -1,8 +1,12 @@
 package bot.commands.owner;
 
 import bot.commands.Command;
+import bot.other.CommandManagerDos;
+import bot.other.PermissionState;
 import bot.stuff.Check;
 import com.google.gson.Gson;
+import net.dv8tion.jda.core.Permission;
+import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
 import java.io.InputStreamReader;
@@ -17,44 +21,11 @@ import java.net.URLEncoder;
  * github.com/oskardevkappa/
  */
 
-public class Test implements Command
+public class Test extends CommandManagerDos
 {
 
 
-    @Override
-    public void action(String[] args, GuildMessageReceivedEvent event)
-    {
-
-        if (!Check.isDev(event.getAuthor()))
-            return;
-
-
-    }
-
-
-
-    @Override
-    public String help() {
-        return null;
-    }
-
-    @Override
-    public String description() {
-        return null;
-    }
-
-    @Override
-    public String[] alias() {
-        return new String[0];
-    }
-
-    @Override
-    public String name() {
-        return "test";
-    }
-
-    @Override
-    public boolean visible() {
-        return false;
+    public Test(String[] names, int lenght, boolean shown, Permission perm, Message msg) {
+        super(names, lenght, shown, perm, msg);
     }
 }

@@ -4,7 +4,9 @@ import bot.Privat;
 import bot.Senpai.Bot;
 import bot.commands.Command;
 import bot.stuff.Messages;
+import net.dv8tion.jda.core.MessageBuilder;
 import net.dv8tion.jda.core.entities.Member;
+import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.User;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
 
@@ -60,8 +62,6 @@ public class Friends implements Command {
 
         event.getChannel().sendMessage(Objects.requireNonNull(Messages.markdown("Your Friends " + event.getAuthor().getName(), sb.toString())) + Objects.requireNonNull(Messages.markdown("Your Friends on this Server " + event.getAuthor().getName(), sb.toString()))).queue();
 
-
-
     }
 
     @Override
@@ -71,7 +71,7 @@ public class Friends implements Command {
 
     @Override
     public String description() {
-        return "Gives you a List with all ppl that got the same Discriminator as you (usefuller for Nitro Users)";
+        return "Gives you a List with all ppl that got the same tag as you (usefuller for Nitro Users)";
     }
 
     @Override

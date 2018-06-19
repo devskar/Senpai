@@ -34,6 +34,7 @@ public class Introduction extends ListenerAdapter {
         EmbedBuilder eb = Messages.embed(event.getGuild().getSelfMember()).setDescription(msg).setAuthor(event.getJDA().getSelfUser().getName(), null, event.getJDA().getSelfUser().getAvatarUrl());
 
 
+        assert tc != null;
         tc.sendMessage(eb.build()).queue();
 
     }
